@@ -7,14 +7,18 @@ import { AnimatedButton, Button } from "./Button";
 import { InfoBlock } from "./InfoBlock";
 import { CommonText } from "./texts/CommonText";
 
-
 const ANIMATION_NAME = 'block_animated';
 const ANIMATION_DURATION = 300;
 
 const Wrapper = styled.div`
     position: absolute;
     inset: 0;
+    z-index: 10;
     background: rgba(20, 59, 16, 0.4);
+    overflow: hidden;
+
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
 
     &.${ANIMATION_NAME}-enter {
         opacity: 0;
@@ -41,7 +45,7 @@ const ManWrapper = styled.div`
     bottom: 0;
     width: 100%;
     overflow: hidden;
-    height: calc(445px * ${({$ratio}) => $ratio});
+    height: calc(460px * ${({$ratio}) => $ratio});
 `;
 
 const Man = styled.div`
@@ -76,6 +80,12 @@ const BlockStyled = styled(InfoBlock)`
         opacity: 0;
         transition: opacity ${ANIMATION_DURATION}ms;
     }
+
+    @media screen and (min-height: 700px) {
+        bottom: ${({$top, $ratio}) => $ratio * (667 - ($top ?? 35))}px;
+        top: auto;
+        transform: translateY(100%);
+    }
 `;
 
 const ButtonStyled = styled(Button)`
@@ -92,7 +102,7 @@ const AnimatedButtonStyled = styled(AnimatedButton)`
     transform: translateX(-50%);
 `;
 
-export const Additional = ({ blockInfo, onClick, shown }) => {
+export const Additional = ({ blockInfo, onClick, shown, children }) => {
     // maxWidth, taleLeft, className, children, isBigTale, top
     const [part, setPart] = useState(0);
     const ratio = useSizeRatio();
@@ -130,6 +140,7 @@ export const Additional = ({ blockInfo, onClick, shown }) => {
                         </BlockStyled>
                     </CSSTransition> 
                 </SwitchTransition>
+                {children}
                 {
                     blockInfo.length > 1 ? (
                         part === 0 ? 

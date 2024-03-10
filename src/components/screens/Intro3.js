@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import {CSSTransition, SwitchTransition} from "react-transition-group";
+import {CSSTransition} from "react-transition-group";
 import start from '../../assets/images/start3.png';
 import man from '../../assets/images/astronaut.svg';
 import { useProgress } from '../../contexts/ProgressContext';
 import { useSizeRatio } from '../../contexts/SizeRatioContext';
-import { Button } from '../shared/Button';
+import { ButtonBottom, AnimatedButton } from '../shared/Button';
 import { InfoBlock } from '../shared/InfoBlock';
 import { BoldText } from '../shared/texts/BoldText';
 import { CommonText } from '../shared/texts/CommonText';
@@ -42,7 +42,13 @@ const Man = styled.div`
     background: url(${man}) no-repeat 0 0 /contain;
 `;
 
-const ButtonStyled = styled(Button)`
+const ButtonStyled = styled(ButtonBottom)`
+    position: relative;
+    z-index: 3;
+    margin-top: auto;
+`;
+
+const AnimatedButtonStyled  = styled(AnimatedButton)`
     position: relative;
     z-index: 3;
     margin-top: auto;
@@ -118,7 +124,7 @@ export const Intro3 = () => {
                 </CommonText>
             </InfoBlockStyled>
         </CSSTransition>
-        <ButtonStyled onClick={handleClick}>ПОЕХАЛИ!</ButtonStyled>
+        {part === 1 ? <AnimatedButtonStyled onClick={handleClick}/> : <ButtonStyled onClick={handleClick}>ПОЕХАЛИ!</ButtonStyled>}
     </Wrapper>
     )
 }

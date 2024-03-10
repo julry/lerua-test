@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import gsap from 'gsap';
@@ -12,6 +12,7 @@ import { InfoBlock } from "./InfoBlock";
 import { CommonText } from "./texts/CommonText";
 import { Button } from "./Button";
 import { BoldText } from "./texts/BoldText";
+import { blurredStyle } from "../../constants/styles";
 
 const ANIMATION_DURATION = 300;
 
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
     width: 100%;
     overflow: hidden;
     background: url(${bg}) no-repeat 0 0 / cover;
-    ${({$isBlurred}) => $isBlurred ? 'filter: blur(1.5px)' : ''};
+    ${({$isBlurred}) => $isBlurred ? blurredStyle : ''};
 `;
 
 const PathStyled = styled(Path)`
@@ -88,6 +89,10 @@ const Modal = styled.div`
     justify-content: center;
     background: rgba(0, 0, 0, 0.3);
 
+
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+
     &.${ANIMATION_NAME}-enter {
         opacity: 0;
     }
@@ -142,7 +147,7 @@ export const PathSreen = ({ activeElement, isFirstRules }) => {
 
     const handleCloseRules = () => {
         if (isFirstRules) {
-            const timeout = setTimeout(() => {
+            setTimeout(() => {
                 setIsHandShown(true);  
             }, 1000);
         }

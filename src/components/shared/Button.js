@@ -39,7 +39,6 @@ const ButtonStyled = styled.button`
     }
 `;
 
-
 export const Button = ({type = 'light', ...props}) => {
     const ratio = useSizeRatio();
 
@@ -61,6 +60,10 @@ const opacity = keyframes`
 `;
 
 const AnimatedWrapper = styled(Button)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     & svg {
         width: calc(80px * ${({$ratio}) => $ratio});
         height: calc(26px * ${({$ratio}) => $ratio});
@@ -94,3 +97,11 @@ export const AnimatedButton = ({type = 'light', ...props}) => {
         </AnimatedWrapper>
     )
 }
+
+export const ButtonBottom = styled(Button)`
+    margin-top: auto;
+`;
+
+export const AnimatedBottom = styled(AnimatedButton)`
+    margin-top: auto;
+`;
