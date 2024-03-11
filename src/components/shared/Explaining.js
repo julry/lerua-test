@@ -49,6 +49,10 @@ const ButtonStyled = styled(Button)`
     bottom: calc(50px * ${({$ratio}) => $ratio});
     left: 50%;
     transform: translateX(-50%);
+
+    @media screen and (max-height: 650px) {
+        bottom: calc(30px * ${({$ratio}) => $ratio});
+    }
 `;
 
 export const Explaining = ({onClick, children, shown, className}) => {

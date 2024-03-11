@@ -21,6 +21,7 @@ import path from '../assets/images/path.png';
 import start2 from '../assets/images/start2.png';
 import start3 from '../assets/images/start3.png';
 import taskBg from '../assets/images/taskBg.png';
+import finalBg from '../assets/images/finalBg.png';
 
 export const screens = [
     {
@@ -31,7 +32,7 @@ export const screens = [
     { 
         id: 1,
         component: Intro2,
-        preloadImages: [taskBg]
+        preloadImages: [taskBg, finalBg]
     },
     { 
         id: 2,
