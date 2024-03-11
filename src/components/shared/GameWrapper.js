@@ -39,7 +39,7 @@ const Title = styled.h3`
 export const GameWrapper = ({
     blockInfo, isBlurred, level, overflow, onCloseIntro, children, onClick, btnDisabled, isAnimated, className, btnText='ГОТОВО'
 }) => {
-    const [isIntro, setIsIntro] = useState(false);
+    const [isIntro, setIsIntro] = useState(true);
     const ratio = useSizeRatio();
 
     const handleCloseIntro = () => {

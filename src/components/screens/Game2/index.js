@@ -150,7 +150,7 @@ export const Game2 = () => {
     }
 
     const checkAnswers = () => {
-        if (initialItems.filter(({isProccess}) => !isProccess).length !== stakeholdersItems.filter(({isProccess}) => !isProccess).length) { 
+        if (initialItems.filter(({isProccess}) => !isProccess).length !== stakeholdersItems.length) { 
             setIsCorrect(false);
             setIsIncorrectFinish(true);
         } else {

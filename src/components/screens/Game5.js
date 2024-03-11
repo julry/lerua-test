@@ -99,7 +99,6 @@ const ExplainBtn = styled(Button)`
 `;
 
 export const Game5 = () => {
-    const [isIntro, setIsIntro] = useState(false);
     const [isCorrect, setIsCorrect] = useState(true);
     const [isAnswered, setIsAnswered] = useState(false);
     const [isShowCorrect, setIsShowCorrect] = useState(false);
@@ -145,8 +144,7 @@ export const Game5 = () => {
         <>
         <GameWrapper
             level={5}
-            overflow={isIntro ? 'hidden' : 'auto'}
-            onCloseIntro={() => setIsIntro(false)}
+            overflow={'auto'}
             onClick={handleClick}
             btnDisabled={!answer}
             btnText={isAnswered ? isShowCorrect ? "ДАЛЕЕ" : "ПОКАЗАТЬ ОТВЕТ" : "ОТВЕТИТЬ"}
