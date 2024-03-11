@@ -140,6 +140,10 @@ const RulesBtn = styled(Button)`
     font-size: ${({$ratio}) => $ratio * 20}px;
     width: ${({$ratio}) => $ratio * 30}px;
     height: ${({$ratio}) => $ratio * 30}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: ${({$ratio}) => $ratio * 4}px;
 `;
 
 export const PathSreen = ({ activeElement, isFirstRules }) => {
