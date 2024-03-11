@@ -5,7 +5,6 @@ import man from '../../assets/images/astronaut.svg';
 import { useSizeRatio } from "../../contexts/SizeRatioContext";
 import { AnimatedButton, Button } from "./Button";
 import { InfoBlock } from "./InfoBlock";
-import { CommonText } from "./texts/CommonText";
 
 const ANIMATION_NAME = 'block_animated';
 const ANIMATION_DURATION = 300;
