@@ -1,14 +1,15 @@
+import { useState } from "react";
+import styled from "styled-components";
 import { useProgress } from "../../contexts/ProgressContext"
 import { Button } from "../shared/Button";
-import bg from '../../assets/images/taskBg.png';
-import styled from "styled-components";
 import { GameWrapper } from "../shared/GameWrapper";
 import { BoldText } from "../shared/texts/BoldText";
 import { CommonText } from "../shared/texts/CommonText";
-import { useState } from "react";
 import { RuleBlock } from "../shared/RuleBlock";
 import { useSizeRatio } from "../../contexts/SizeRatioContext";
 import { colors } from "../../constants/colors";
+import { Additional } from "../shared/Additional";
+import { Explaining } from "../shared/Explaining";
 
 const RuleBlockStyled = styled(RuleBlock)`
     padding: ${({$ratio}) => $ratio * 15}px;
@@ -90,11 +91,20 @@ const IncorrectText = styled(RuleBlock)`
     opacity: ${({opacity}) => opacity};
 `;
 
+const ExplainBtn = styled(Button)`
+    position: absolute;
+    bottom: ${({$ratio}) => $ratio * 112}px;
+    left: 50%;
+    transform: translateX(-50%);
+`;
+
 export const Game5 = () => {
     const [isIntro, setIsIntro] = useState(false);
     const [isCorrect, setIsCorrect] = useState(true);
     const [isAnswered, setIsAnswered] = useState(false);
     const [isShowCorrect, setIsShowCorrect] = useState(false);
+    const [isAdditional, setIsAdditional] = useState(false);
+    const [isFullExplain, setIsFullExplain] = useState(false);
     const [answer, setAnswer] = useState();
     const {next} = useProgress();
     const ratio = useSizeRatio();
@@ -107,11 +117,12 @@ export const Game5 = () => {
                 return;
            }
 
-           next();
+           setIsAdditional(true);
 
            return;
         } 
 
+        setIsShowCorrect(answer === 1);
         setIsCorrect(answer === 1);
         setIsAnswered(true);
     };
@@ -131,6 +142,7 @@ export const Game5 = () => {
     };
 
     return (
+        <>
         <GameWrapper
             level={5}
             overflow={isIntro ? 'hidden' : 'auto'}
@@ -237,5 +249,40 @@ export const Game5 = () => {
                 <IncorrectText $ratio={ratio} opacity={+!isCorrect}>Верный ответ был совсем рядом…</IncorrectText>
             </Answers>
         </GameWrapper>
+        <Additional
+                shown={isAdditional}
+                onClick={next}
+                blockInfo={[
+                    {
+                        text: 
+                        <CommonText>
+                            Думаю, из этого кейса ты узнал для себя что‑то новое. Благодаря{' '}
+                            тебе всё наше сообщество аналитиков сможет <BoldText>пополнять копилку знаний,</BoldText>{' '}
+                            а самые матёрые гении анализа всегда будут готовы прийти на помощь.{'\n'}
+                            Мы за обмен опытом!
+                        </CommonText>,
+                        isBigTale: true,
+                        maxWidth: 243,
+                        taleLeft: 75,
+                    }
+                ]}
+            >
+                <ExplainBtn 
+                    type="dark" 
+                    $ratio={ratio}
+                    onClick={() => setIsFullExplain(true)}
+                >
+                    ПОЯСНЕНИЕ
+                </ExplainBtn>
+            </Additional>
+            <Explaining shown={isFullExplain} onClick={() => setIsFullExplain(false)}>
+                <CommonText>
+                Этот запрос корректно соединяет таблицу Orders с таблицей OrderStatus по status_id,{' '}
+                группирует результаты по названию статуса и подсчитывает количество заказов для каждого статуса (COUNT(o.order_id)).{'\n\n'} 
+                Завершает запрос инструкция ORDER BY, которая упорядочивает результаты по количеству{' '}
+                заказов в убывающем порядке, что соответствует требованию задачи.
+                </CommonText>
+            </Explaining>
+        </>
     )
 }

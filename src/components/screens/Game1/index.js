@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import update from 'immutability-helper';
 import styled from "styled-components";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { colors } from "../../../constants/colors";
 import { useProgress } from "../../../contexts/ProgressContext"
 import { useSizeRatio } from "../../../contexts/SizeRatioContext";
@@ -10,6 +11,11 @@ import { CommonText } from "../../shared/texts/CommonText";
 import { Item } from "./Item";
 import {correctAnswers, initialItems} from './items';
 import { Additional } from "../../shared/Additional";
+
+
+const SWITCH_DURATION = 400;
+
+const SWITCH_NAME = 'correct';
 
 const Wrapper = styled(GameWrapper)`
     padding-left: ${({$ratio}) => $ratio * 37}px;
@@ -41,6 +47,24 @@ const GameBlock = styled.div`
     padding: ${({$ratio}) => $ratio * 5}px;
     display: flex;
     flex-direction: column;
+
+    &.${SWITCH_NAME}-enter {
+        opacity: 0;
+    }
+
+    &.${SWITCH_NAME}-enter-active {
+        opacity: 1;
+        transition: opacity ${SWITCH_DURATION}ms;
+    }
+
+    &.${SWITCH_NAME}-exit {
+        opacity: 1;
+    }
+
+    &.${SWITCH_NAME}-exit-active {
+        opacity: 0;
+        transition: opacity ${SWITCH_DURATION}ms;
+    }
 `;
 
 const IncorrectInfo = styled.div`
@@ -61,6 +85,7 @@ export const Game1 = () => {
     const [isFinish, setIsFinish] = useState(false);
     const [items, setItems] = useState(initialItems);
     const [isCorrect, setIsCorrect] = useState(true);
+    const [isShowingCorrect, setIsShowingCorrect] = useState(false);
     const [isIncorrectFinish, setIsIncorrectFinish] = useState(false);
     const [finalModal, setFinalModal] = useState({shown: false, winText: false});
     const {next} = useProgress();
@@ -81,6 +106,7 @@ export const Game1 = () => {
     };
 
     const showCorrectAnswers = () => {
+        setIsShowingCorrect(true);
         setItems(prev => prev.map(item => ({...item, order: correctAnswers.indexOf(item.id)})));
         setIsCorrect(true);
     }
@@ -147,18 +173,22 @@ export const Game1 = () => {
                         <CommonText>
                             Расставь в правильном порядке пункты из списка, меняя их местами.
                         </CommonText>
-                        <GameBlock $ratio={ratio} $isCorrect={isCorrect}>
-                            {items.map((item, index) => (
-                                <Item 
-                                    key={item.id} 
-                                    index={index} 
-                                    ratio={ratio}
-                                    moveItem={moveItem}
-                                    borderColor={isFinish && !isCorrect ? colors.yellow : colors.green}
-                                    {...item}
-                                />
-                            ))}
-                        </GameBlock>
+                        <SwitchTransition mode='out-in'>
+                            <CSSTransition key={isShowingCorrect} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
+                                <GameBlock $ratio={ratio} $isCorrect={isCorrect}>
+                                    {items.map((item, index) => (
+                                        <Item 
+                                            key={item.id} 
+                                            index={index} 
+                                            ratio={ratio}
+                                            moveItem={moveItem}
+                                            borderColor={isFinish && !isCorrect ? colors.yellow : colors.green}
+                                            {...item}
+                                        />
+                                    ))}
+                                </GameBlock>
+                            </CSSTransition>
+                        </SwitchTransition>
                     </ContentWrapper>
                     {isIncorrectFinish && (
                         <IncorrectInfo $ratio={ratio}>

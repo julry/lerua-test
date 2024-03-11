@@ -15,14 +15,23 @@ import { PathScreen4 } from "../components/screens/PathScreen4";
 import { PathScreen5 } from "../components/screens/PathScreen5";
 import { PathScreen6 } from "../components/screens/PathScreen6";
 
+import astronaut from '../assets/images/astronaut.svg';
+import click from '../assets/images/astronaut.svg';
+import path from '../assets/images/path.png';
+import start2 from '../assets/images/start2.png';
+import start3 from '../assets/images/start3.png';
+import taskBg from '../assets/images/taskBg.png';
+
 export const screens = [
     {
         id: 0,
-        component: Intro
+        component: Intro,
+        preloadImages: [path, astronaut, click, start2, start3, path]
     },
     { 
         id: 1,
-        component: Intro2
+        component: Intro2,
+        preloadImages: [taskBg]
     },
     { 
         id: 2,

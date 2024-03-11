@@ -1,7 +1,9 @@
 import { useDrop } from "react-dnd"
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import styled from "styled-components";
 import { colors } from "../../../constants/colors";
 import { RuleBlock } from "../../shared/RuleBlock";
+import { SWITCH_DURATION, SWITCH_NAME } from "./constants";
 
 const Wrapper = styled.div`
     position: relative;
@@ -35,11 +37,11 @@ const Field = styled.div`
     top: ${({$ratio}) => $ratio * 38}px;
     height: ${({$ratio}) => $ratio * 110}px;
     overflow-y: auto;
-    box-shadow: inset 0 0 0 2px ${({$borderColor}) => $borderColor ?? colors.green};
+    border: 2px solid ${({$borderColor}) => $borderColor ?? colors.green};
     background: ${colors.gray};
     font-size: ${({$ratio}) => $ratio * 10}px;
     border-radius: ${({$ratio}) => $ratio * 10}px;
-    padding: ${({$ratio}) => $ratio * 10}px;
+    padding: ${({$ratio}) => $ratio * 5}px ${({$ratio}) => $ratio * 7}px;
     font-weight: 700;
     font-family: 'Leroy Merlin Sans', sans-serif;
     text-align: center;
@@ -59,13 +61,34 @@ const Field = styled.div`
         width: ${({$ratio}) => $ratio * 69}px;
         height: 1px;
         left: 50%;
-        border-radius: 50%;
+        border-radius: 20px;
         transform: translateX(-50%);
         background: ${({$isFinish, $borderColor}) => $isFinish ? $borderColor : 'transparent'};
     }
 `;
 
-export const Block = ({ title, onDrop, ratio, onClick, children, isCorrect, isFinish }) => {
+const TextWrapper = styled.div`
+
+    &.${SWITCH_NAME}-enter {
+        opacity: 0;
+    }
+
+    &.${SWITCH_NAME}-enter-active {
+        opacity: 1;
+        transition: opacity ${SWITCH_DURATION}ms;
+    }
+
+    &.${SWITCH_NAME}-exit {
+        opacity: 1;
+    }
+
+    &.${SWITCH_NAME}-exit-active {
+        opacity: 0;
+        transition: opacity ${SWITCH_DURATION}ms;
+    }
+`;
+
+export const Block = ({ id, title, onDrop, ratio, onClick, children, isCorrect, isFinish, isShowingCorrect }) => {
     const [, drop] = useDrop(() => ({
         accept: 'item',
         collect: monitor => ({
@@ -83,7 +106,13 @@ export const Block = ({ title, onDrop, ratio, onClick, children, isCorrect, isFi
                 {title}
             </Title>
             <Field $ratio={ratio} $borderColor={isCorrect ? colors.green : colors.yellow} $isFinish={isFinish}>
-                {children}
+                <SwitchTransition mode='out-in'>
+                    <CSSTransition key={`${id}_${isShowingCorrect}`} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
+                        <TextWrapper>
+                            {children}
+                        </TextWrapper>
+                    </CSSTransition>
+                </SwitchTransition>
             </Field>
         </Wrapper>
     )

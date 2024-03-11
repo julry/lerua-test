@@ -46,6 +46,7 @@ const PathStyled = styled(Path)`
         cursor: pointer;
         & .stroke {
             stroke: ${colors.yellow};
+            stroke-opacity: 1;
         }
         & .fill {
             fill: ${colors.yellow};
@@ -56,6 +57,7 @@ const PathStyled = styled(Path)`
        `& #${element} {
             & .stroke {
                 stroke: ${colors.green};
+                stroke-opacity: 1;
             }
             & .fill {
                 fill: ${colors.green};

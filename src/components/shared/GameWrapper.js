@@ -21,6 +21,11 @@ const Wrapper = styled.div`
     ${({$blurred}) => $blurred ? blurredStyle : ''};
     padding: ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 50}px;
     scrollbar-color: transparent transparent;
+
+    @media screen and (max-height: 650px) {
+        padding-bottom: ${({$ratio}) => $ratio * 30}px;
+        padding-top: ${({$ratio}) => $ratio * 18}px
+    }
 `;
 
 const Title = styled.h3`

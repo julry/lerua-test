@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { colors } from "../../../constants/colors";
 import { useProgress } from "../../../contexts/ProgressContext"
 import { useSizeRatio } from "../../../contexts/SizeRatioContext";
@@ -8,11 +9,12 @@ import { Button } from "../../shared/Button";
 import { GameWrapper } from "../../shared/GameWrapper";
 import { BoldText } from "../../shared/texts/BoldText";
 import { CommonText } from "../../shared/texts/CommonText";
+import { Explaining } from "../../shared/Explaining";
+import { RuleBlock } from "../../shared/RuleBlock";
 import { initialItems2 as initialItems } from "./items";
 import { Item } from "./Item";
 import { GameBlock } from "./GameBlock";
-import { Explaining } from "../../shared/Explaining";
-import { RuleBlock } from "../../shared/RuleBlock";
+import { SWITCH_DURATION, SWITCH_NAME } from "./constants";
 
 const Wrapper = styled(GameWrapper)`
     padding-left: ${({$ratio}) => $ratio * 23}px;
@@ -25,27 +27,25 @@ const ContentWrapper = styled(RuleBlock)`
     padding: ${({$ratio}) => $ratio * 5}px ${({$ratio}) => $ratio * 20}px;
 `;
 
+const BlocksWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+`;
+
 const Block = styled.div`
-    position: absolute;
-    top: ${({$ratio}) => $ratio * 125}px;  
+    margin-top: ${({$ratio}) => $ratio * 5}px;  
     padding: ${({$ratio}) => $ratio * 5}px;  
     border: 2px solid rgba(0, 0, 0, 0.2);
     background: ${colors.darkGray};
     border-radius: ${({$ratio}) => $ratio * 15}px;
     padding-top: ${({$ratio}) => $ratio * 10}px;
-    width: calc((100% - 51 * ${({$ratio}) => $ratio}px) / 2);
+    width: calc((100%  - 5 * ${({$ratio}) => $ratio}px) / 2);
 
     & + & {
         margin-left: ${({$ratio}) => $ratio * 5}px;
     }
-`;
-
-const BlockLeft = styled(Block)`
-    left: ${({$ratio}) => $ratio * 23}px;
-`;
-
-const BlockRight = styled(Block)`
-    right: ${({$ratio}) => $ratio * 23}px;
 `;
 
 const List = styled.div`
@@ -84,7 +84,7 @@ const InfoButton = styled(Button)`
 
 const IncorrectInfo = styled(ContentWrapper)`
     position: absolute;
-    bottom: ${({$ratio}) => $ratio * 135}px;
+    bottom: ${({$ratio}) => $ratio * 115}px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 6;
@@ -102,6 +102,7 @@ export const Game2 = () => {
     const [isIncorrectFinish, setIsIncorrectFinish] = useState(false);
     const [finalModal, setFinalModal] = useState({shown: false, winText: false});
     const [isExplain, setIsExplain] = useState(false);
+    const [isShowingCorrect, setIsShowingCorrect] = useState(false);
     const {next} = useProgress();
     const ratio = useSizeRatio();
     const leftRef = useRef();
@@ -158,6 +159,7 @@ export const Game2 = () => {
     }
 
     const showCorrectAnswers = () => {
+        setIsShowingCorrect(true);
         const proccess = stakeholdersItems.filter(({isProccess}) => isProccess);
         const stakeholders = proccessItems.filter(({isProccess}) => !isProccess);
         setProcessItems(prev => [...prev.filter(({isProccess}) => !!isProccess), ...proccess]);
@@ -218,22 +220,33 @@ export const Game2 = () => {
                 <ContentWrapper $ratio={ratio}>
                     Перетаскивай каждого участника проекта в нужный столбец.
                 </ContentWrapper>
-                <BlockLeft $ratio={ratio} ref={leftListRef}>
-                    <BlockTitle $ratio={ratio}>УЧАСТНИКИ{'\n'}ПРОЦЕССА</BlockTitle>
-                    <GameBlock ratio={ratio} onDrop={handlePushToProccess} isCorrect={isCorrect} hasChildren={!!proccessItems.length}>
-                        {proccessItems.map(item => (
-                            <ItemStyled key={`proccess_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
-                        ))}
-                    </GameBlock>
-                </BlockLeft>
-                <BlockRight $ratio={ratio} ref={rightListRef}>
-                    <BlockTitle $ratio={ratio}>ПЕРВИЧНЫЕ{'\n'}СТЕЙКХОЛДЕРЫ</BlockTitle>
-                    <GameBlock ratio={ratio} onDrop={handlePushToStakeHolder} isCorrect={isCorrect} hasChildren={!!stakeholdersItems.length}>
-                        {stakeholdersItems.map(item => (
-                            <ItemStyled key={`stakeholders_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
-                        ))} 
-                    </GameBlock>
-                </BlockRight>
+                <BlocksWrapper>
+                    <Block $ratio={ratio} ref={leftListRef}>
+                        <BlockTitle $ratio={ratio}>УЧАСТНИКИ{'\n'}ПРОЦЕССА</BlockTitle>
+                        <SwitchTransition mode='out-in'>
+                            <CSSTransition key={`proccess_${isShowingCorrect}`} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
+                                <GameBlock ratio={ratio} onDrop={handlePushToProccess} isCorrect={isCorrect} hasChildren={!!proccessItems.length}>
+                                    {proccessItems.map(item => (
+                                        <ItemStyled key={`proccess_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
+                                    ))}
+                                </GameBlock>
+                            </CSSTransition>
+                        </SwitchTransition>
+                    </Block>
+                    <Block $ratio={ratio} ref={rightListRef}>
+                        <BlockTitle $ratio={ratio}>ПЕРВИЧНЫЕ{'\n'}СТЕЙКХОЛДЕРЫ</BlockTitle>
+                        <SwitchTransition mode='out-in'>
+                            <CSSTransition key={isShowingCorrect} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
+                                <GameBlock ratio={ratio} onDrop={handlePushToStakeHolder} isCorrect={isCorrect} hasChildren={!!stakeholdersItems.length}>
+                                    {stakeholdersItems.map(item => (
+                                        <ItemStyled key={`stakeholders_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
+                                    ))} 
+                                </GameBlock>
+                            </CSSTransition>
+                        </SwitchTransition>
+                    </Block>
+                </BlocksWrapper>
+                
                 <ListLeft $ratio={ratio} ref={leftRef}>
                     {itemsLeft.map((item) => (
                         <Item key={item?.id} {...item} ratio={ratio}/>

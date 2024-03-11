@@ -23,6 +23,10 @@ const Wrapper = styled(GameWrapper)`
     padding-right: ${({$ratio}) => $ratio * 26}px;
     padding-bottom: ${({$ratio}) => $ratio * 26}px;
     position: relative;
+
+    @media screen and (max-height: 650px) {
+        padding-bottom: ${({$ratio}) => $ratio * 16}px;
+    }
 `;
 
 const ContentWrapper = styled(RuleBlock)`
@@ -109,6 +113,7 @@ export const Game4 = () => {
     const [isFinish, setIsFinish] = useState(false);
     const [allWords, setAllWords] = useState(words);
     const [isFullExplain, setIsFullExplain] = useState(false);
+    const [isShowingCorrect, setIsShowingCorrect] = useState(false);
     const [pickedWords, setPickedWords] = useState({
         systemWords: [],
         roleWords: [],
@@ -125,6 +130,7 @@ export const Game4 = () => {
     const $fieldsWrapper = useRef();
 
     const showCorrectAnswers = () => {
+        setIsShowingCorrect(true);
         const { isSystemCorrect, isDescCorrect, isRoleCorrect, systemWords, descriptionWords, roleWords } = pickedWords;
         let systemAll = [...systemWords];
         let roleAll = [...roleWords];
@@ -147,7 +153,7 @@ export const Game4 = () => {
         }
 
         if (!isRoleCorrect) {
-            const roleDesc = roleWords.filter(({isRole}) => isRole);
+            const roleDesc = descriptionWords.filter(({isRole}) => isRole);
             const roleSystem= systemWords.filter(({isRole}) => isRole);
             roleAll = [
                 ...roleWords.filter(({isRole}) => isRole),
@@ -333,6 +339,8 @@ export const Game4 = () => {
                         onClick={() => handleBlockClick('systemWords', 'ПОВЕДЕНИЕ СИСТЕМЫ')}
                         isCorrect={pickedWords.isSystemCorrect}
                         isFinish={isFinish}
+                        id={'sys'}
+                        isShowingCorrect={isShowingCorrect}
                     >
                         {pickedWords.systemWords.map(word => (
                             <p key={`system_${word.id}`}>{word.text}</p>
@@ -345,11 +353,13 @@ export const Game4 = () => {
                         onClick={() => handleBlockClick('roleWords', 'РОЛЬ ПОЛЬЗОВАТЕЛЯ')}
                         isCorrect={pickedWords.isRoleCorrect}
                         isFinish={isFinish}
-                    >{
-                        pickedWords.roleWords.map(word => (
+                        id={'role'}
+                        isShowingCorrect={isShowingCorrect}
+                    >
+                        {pickedWords.roleWords.map(word => (
                             <p key={`role_${word.id}`}>{word.text}</p>
-                        ))
-                    }</Block>
+                        ))}
+                    </Block>
                     <Block 
                         title={"Описание\nцели"} 
                         ratio={ratio} 
@@ -357,11 +367,13 @@ export const Game4 = () => {
                         onClick={() => handleBlockClick('descriptionWords', 'ОПИСАНИЕ ЦЕЛИ')}
                         isCorrect={pickedWords.isDescCorrect}
                         isFinish={isFinish}
-                    >{
-                        pickedWords.descriptionWords.map(word => (
+                        id={'desc'}
+                        isShowingCorrect={isShowingCorrect}
+                    >
+                        {pickedWords.descriptionWords.map(word => (
                             <p key={`desc_${word.id}`}>{word.text}</p>
-                        ))
-                    }</Block>
+                        ))}
+                    </Block>
                     {isTip && (
                         <>
                             <BlockTipWrapper $ratio={ratio} onClick={() => setIsTip(false)}/>

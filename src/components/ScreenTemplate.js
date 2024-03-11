@@ -29,6 +29,8 @@ const Content = styled.div`
     width: 100%;
     height: 100%;
     transform: translate(0, 0);
+    background-color: #1D1D1D;
+
 
     @media (min-width: ${MIN_MOCKUP_WIDTH}px) {
         overflow: hidden;
