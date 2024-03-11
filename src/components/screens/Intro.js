@@ -19,6 +19,11 @@ const Wrapper = styled.div`
 
 `;
 
+const InfoBlockStyled = styled(InfoBlock)`
+    position: absolute;
+    bottom: ${({$ratio}) => $ratio * 465}px;
+`;
+
 const Man = styled.div`
     position: absolute;
     right: 0;
@@ -52,13 +57,13 @@ export const Intro = () => {
     return (
     <Wrapper $ratio={ratio}>
         <Man $ratio={ratio} />
-        <InfoBlock isBigTale taleLeft={92} maxWidth={240}>
+        <InfoBlockStyled isBigTale taleLeft={92} maxWidth={240} $ratio={ratio}>
             <CommonText isBig>
             Приветствую на борту космического корабля!{'\n\n'}
             Скоро мы отправимся в путешествие на «Планету аналитиков» с Леруа Мерлен.{'\n\n'}
             <BoldText>Запускай корабль и отправляйся в полёт!</BoldText>
             </CommonText>
-        </InfoBlock>
+        </InfoBlockStyled>
         <Info $ratio={ratio}>
             <CommonText>
                 Ведущий аналитик{'\n'}

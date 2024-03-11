@@ -30,6 +30,18 @@ const Wrapper = styled.div`
 const PathStyled = styled(Path)`
     margin-left: ${({$ratio}) => $ratio * 50}px;
 
+    @media screen and (max-width: 450px) and (min-height: 800px) {
+        margin-left: ${({$ratio}) => $ratio * 25}px;
+    }
+
+    @media screen and (max-width: 320px) and (min-height: 700px) {
+        margin-left: ${({$ratio}) => $ratio * 5}px;
+    }
+
+    @media screen and (max-width: 300px) and (min-height: 600px) {
+        margin-left: 0;
+    }
+
     & ${({$activeElement}) => $activeElement} {
         cursor: pointer;
         & .stroke {
@@ -50,7 +62,6 @@ const PathStyled = styled(Path)`
             }
         }` 
     )).join(';')}
-
 `;
 
 const Click = styled.div`

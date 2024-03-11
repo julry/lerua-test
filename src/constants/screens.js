@@ -1,4 +1,5 @@
 import { Final } from "../components/screens/Final";
+import { Final2 } from "../components/screens/Final2";
 import { Game1 } from "../components/screens/Game1";
 import { Game2 } from "../components/screens/Game2";
 import { Game3 } from "../components/screens/Game3";
@@ -74,5 +75,9 @@ export const screens = [
     {
         id: 14,
         component: Final
+    },
+    {
+        id: 15,
+        component: Final2
     }
 ];

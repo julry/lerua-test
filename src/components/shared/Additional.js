@@ -59,9 +59,15 @@ const Man = styled.div`
 
 const BlockStyled = styled(InfoBlock)`
     position: absolute;
-    top: ${({$top, $ratio}) => $ratio * ($top ?? 35)}px;
     left: ${({$ratio}) => $ratio * 22}px;
+    bottom: ${({$top, $ratio}) => $ratio * (667 - ($top ?? 35))}px;
+    transform: translateY(100%);
     padding-right: 5px;
+
+    @media screen and (min-width: 360px) and (min-height: 800px) {
+        transform: none;
+        bottom: 460px;
+    }
 
     &.${ANIMATION_NAME}-enter {
         opacity: 0;
@@ -80,12 +86,6 @@ const BlockStyled = styled(InfoBlock)`
         opacity: 0;
         transition: opacity ${ANIMATION_DURATION}ms;
     }
-
-    @media screen and (min-height: 700px) {
-        bottom: ${({$top, $ratio}) => $ratio * (667 - ($top ?? 35))}px;
-        top: auto;
-        transform: translateY(100%);
-    }
 `;
 
 const ButtonStyled = styled(Button)`
@@ -103,7 +103,6 @@ const AnimatedButtonStyled = styled(AnimatedButton)`
 `;
 
 export const Additional = ({ blockInfo, onClick, shown, children }) => {
-    // maxWidth, taleLeft, className, children, isBigTale, top
     const [part, setPart] = useState(0);
     const ratio = useSizeRatio();
 

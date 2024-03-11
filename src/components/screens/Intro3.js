@@ -54,6 +54,24 @@ const AnimatedButtonStyled  = styled(AnimatedButton)`
     margin-top: auto;
 `;
 
+const InfoBlockStyledFirst = styled(InfoBlock)`
+    position: absolute;
+    bottom: ${({$ratio}) => $ratio * 414}px;
+    
+    @media screen and (min-height: 700px) {
+        bottom: ${({$ratio}) => $ratio * 425}px;
+    }
+`;
+
+const Blocks = styled.div`
+    position: absolute;
+    bottom: ${({$ratio}) => $ratio * 382}px;
+
+    @media screen and (min-height: 700px) {
+        bottom: ${({$ratio}) => $ratio * 425}px;
+    }
+`;
+
 const InfoBlockStyled = styled(InfoBlock)`
     padding-right: calc(10px * ${({$ratio}) => $ratio});
 
@@ -96,7 +114,7 @@ export const Intro3 = () => {
             <Man $ratio={ratio} />
         </ManWrapper>
         {part === 1 && (
-            <InfoBlock taleLeft={90} maxWidth={268}>
+            <InfoBlockStyledFirst taleLeft={90} maxWidth={268} $ratio={ratio}>
                 <CommonText>
                     С прибытием{'\n'}на <BoldText>«Планету аналитиков»!</BoldText>{'\n\n'}
                     Мы с коллегами открыли её совсем недавно и обнаружили, что она пригодна для жизни.{' '} 
@@ -104,26 +122,28 @@ export const Intro3 = () => {
                     ни одного объекта инфраструктуры.{'\n\n'}
                     Тебе поручена важная <BoldText>миссия</BoldText> — обустроить это место для комфортной жизни.
                 </CommonText>
-            </InfoBlock>
+            </InfoBlockStyledFirst>
         )}
-        <CSSTransition in={part === 2} mountOnEnter unmountOnExit timeout={ANIMATION_DURATION} classNames={ANIMATION_NAME}>
-            <InfoBlockStyled maxWidth={268} $ratio={ratio}>
-                <CommonText>
-                    Обустройство на Планете — сложный процесс. Но если 
-                    его проанализировать, то можно разбить на более простые этапы. 
-                    Давай <BoldText>начнём с системы доставки ресурсов</BoldText> с Земли на Планету, которую мы 
-                    разработаем вместе моими коллегами из Леруа Мерлен.
-                </CommonText>
-            </InfoBlockStyled>
-        </CSSTransition> 
-        <CSSTransition in={part === 2} mountOnEnter unmountOnExit timeout={ANIMATION_DURATION} classNames={ANIMATION_NAME}>
-            <InfoBlockStyled taleLeft={98} maxWidth={268} $ratio={ratio}>
-                <CommonText>
-                    Тебе предстоит <BoldText>пошагово решать этот кейс</BoldText> — каждое выполненное задание 
-                    будет приближать нашу «Планету аналитиков» к моменту заселения первыми жителями!
-                </CommonText>
-            </InfoBlockStyled>
-        </CSSTransition>
+        <Blocks $ratio={ratio}>
+            <CSSTransition in={part === 2} mountOnEnter unmountOnExit timeout={ANIMATION_DURATION} classNames={ANIMATION_NAME}>
+                <InfoBlockStyled maxWidth={268} $ratio={ratio}>
+                    <CommonText>
+                        Обустройство на Планете — сложный процесс. Но если 
+                        его проанализировать, то можно разбить на более простые этапы. 
+                        Давай <BoldText>начнём с системы доставки ресурсов</BoldText> с Земли на Планету, которую мы 
+                        разработаем вместе моими коллегами из Леруа Мерлен.
+                    </CommonText>
+                </InfoBlockStyled>
+            </CSSTransition> 
+            <CSSTransition in={part === 2} mountOnEnter unmountOnExit timeout={ANIMATION_DURATION} classNames={ANIMATION_NAME}>
+                <InfoBlockStyled taleLeft={98} maxWidth={268} $ratio={ratio}>
+                    <CommonText>
+                        Тебе предстоит <BoldText>пошагово решать этот кейс</BoldText> — каждое выполненное задание 
+                        будет приближать нашу «Планету аналитиков» к моменту заселения первыми жителями!
+                    </CommonText>
+                </InfoBlockStyled>
+            </CSSTransition>
+        </Blocks>
         {part === 1 ? <AnimatedButtonStyled onClick={handleClick}/> : <ButtonStyled onClick={handleClick}>ПОЕХАЛИ!</ButtonStyled>}
     </Wrapper>
     )

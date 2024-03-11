@@ -11,6 +11,7 @@ import { AnimatedBottom, ButtonBottom } from "./Button";
 
 const Wrapper = styled.div`
     overflow: ${({$overflow}) => $overflow ?? 'hidden'};
+    overflow-x: hidden;
     background: url(${bg}) no-repeat 0 0 / cover;
     width: 100%;
     height: 100%;
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
     align-items: center;
     ${({$blurred}) => $blurred ? blurredStyle : ''};
     padding: ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 50}px;
+    scrollbar-color: transparent transparent;
 `;
 
 const Title = styled.h3`
