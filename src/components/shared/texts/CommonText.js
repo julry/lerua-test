@@ -6,8 +6,8 @@ const Text = styled.p`
     line-height: 100%;
 `;
 
-export const CommonText = (props) => {
+export const CommonText = ({isBig, ...props}) => {
     const ratio = useSizeRatio();
 
-    return <Text {...props} $ratio={ratio} $isBig={props.isBig}/>
+    return <Text {...props} $ratio={ratio} $isBig={isBig}/>
 }

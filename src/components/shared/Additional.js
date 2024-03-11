@@ -104,7 +104,7 @@ const AnimatedButtonStyled = styled(AnimatedButton)`
     bottom: calc(50px * ${({$ratio}) => $ratio});
     left: 50%;
     transform: translateX(-50%);
-    
+
     @media screen and (max-height: 650px) {
         bottom: calc(30px * ${({$ratio}) => $ratio});
     }
@@ -141,9 +141,7 @@ export const Additional = ({ blockInfo, onClick, shown, children }) => {
                             $top={blockInfo[part].top} 
                             $ratio={ratio}
                         >
-                            <CommonText>
                                 {blockInfo[part].text}
-                            </CommonText>
                         </BlockStyled>
                     </CSSTransition> 
                 </SwitchTransition>

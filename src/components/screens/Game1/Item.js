@@ -13,16 +13,14 @@ const Line = styled.div`
     font-size: ${({$ratio}) => $ratio * 16}px;
     box-shadow: inset 0 0 0 2px ${({$borderColor}) => $borderColor ?? colors.green};
     opacity: ${({$opacity}) => $opacity};
-    order: ${({$order}) => $order};
-    /* transition: order 0.5s; */
-    cursor: grab;
+    cursor: ${({$isDrag}) => $isDrag ? 'grab' : 'default'};
 
     & + & {
         margin-top: 2px;
     }
 `;
 
-export const Item = ({ id, text, index, moveItem, ratio, borderColor, order}) => {
+export const Item = ({ id, text, index, moveItem, ratio, borderColor, order, isDrag }) => {
     const $ref = useRef();
 
     const [{ handlerId }, drop] = useDrop({
@@ -92,11 +90,11 @@ export const Item = ({ id, text, index, moveItem, ratio, borderColor, order}) =>
 
     return (
         <Line 
-            ref={mergeRefs([$ref, drag, drop])} 
+            ref={isDrag ? mergeRefs([$ref, drag, drop]) : null} 
             data-handler-id={handlerId} 
             $ratio={ratio} 
             $borderColor={borderColor}
-            $order={order}
+            $isDrag={isDrag}
         >
             {text}
         </Line>

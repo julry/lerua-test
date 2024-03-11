@@ -26,13 +26,11 @@ import finalBg from '../assets/images/finalBg.png';
 export const screens = [
     {
         id: 0,
-        component: Intro,
-        preloadImages: [path, astronaut, click, start2, start3, path]
+        component: Intro
     },
     { 
         id: 1,
-        component: Intro2,
-        preloadImages: [taskBg, finalBg]
+        component: Intro2
     },
     { 
         id: 2,
@@ -91,3 +89,8 @@ export const screens = [
         component: Final2
     }
 ];
+
+
+export const preloadImages = [
+    path, astronaut, click, start2, start3, path, taskBg, finalBg
+]

@@ -217,7 +217,7 @@ export const Game3 = () => {
     const {next} = useProgress();
 
     const curQuestion = useMemo(() => questions.find(({id}) => id === question), [question]);
-    const answersList = useMemo(() => shuffleArray(commonAnswers), [question]);
+    const answersList = useMemo(() => shuffleArray(commonAnswers), []);
 
     const getAnswerBg = (id) => {
         if (!answers[question]) return undefined;
@@ -276,7 +276,7 @@ export const Game3 = () => {
                             {question > 1 && (
                                 <ArrowLeft $ratio={ratio} onClick={() => handleChangeQuestion(question - 1)}>
                                     <svg viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 17.5L2 9.5L10 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 17.5L2 9.5L10 1.5" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
                                 </ArrowLeft>
                             )}
@@ -292,7 +292,7 @@ export const Game3 = () => {
                                 question < 3 && (
                                     <ArrowRight disabled={!answers[question]} $ratio={ratio} onClick={() => handleChangeQuestion(question + 1)}>
                                         <svg viewBox="0 0 12 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 17.5L10 9.5L2 1.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M2 17.5L10 9.5L2 1.5" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                                         </svg>
                                     </ArrowRight>
                                 )

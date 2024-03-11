@@ -180,6 +180,7 @@ export const Game1 = () => {
                                         <Item 
                                             key={item.id} 
                                             index={index} 
+                                            isDrag={!isFinish}
                                             ratio={ratio}
                                             moveItem={moveItem}
                                             borderColor={isFinish && !isCorrect ? colors.yellow : colors.green}

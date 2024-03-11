@@ -91,9 +91,9 @@ export const AnimatedButton = ({type = 'light', ...props}) => {
     return (
         <AnimatedWrapper type={type} {...props} $ratio={ratio}>
             <svg viewBox="0 0 80 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path id="btn_path_1" d="M2 24L14 13L2 2" stroke="white" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path id="btn_path_2" d="M34 24L46 13L34 2" stroke="white" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                <path  id="btn_path_3" d="M66 24L78 13L66 2" stroke="white" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path id="btn_path_1" d="M2 24L14 13L2 2" stroke="white" strokeOpacity="0.55" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path id="btn_path_2" d="M34 24L46 13L34 2" stroke="white" strokeOpacity="0.55" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <path  id="btn_path_3" d="M66 24L78 13L66 2" stroke="white" strokeOpacity="0.55" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         </AnimatedWrapper>
     )

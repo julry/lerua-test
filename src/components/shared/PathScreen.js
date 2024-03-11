@@ -166,7 +166,7 @@ export const PathSreen = ({ activeElement, isFirstRules }) => {
         if (isFirstRules) {
             setTimeout(() => {
                 setIsHandShown(true);  
-            }, 1000);
+            }, 100);
         }
 
         setIsRulesShown(false);

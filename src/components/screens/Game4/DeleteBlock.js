@@ -104,6 +104,10 @@ const Title = styled(CommonText)`
 export const DeleteBlock = ({onDelete, title, array, shown, className, onClose}) => {
     const ratio = useSizeRatio();
 
+    useEffect(() => {
+        if (array?.length === 0) onClose();
+    }, [array?.length, onClose]);
+
     return (
         <CSSTransition
             in={shown && array?.length}

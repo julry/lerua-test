@@ -150,7 +150,11 @@ export const Game2 = () => {
     }
 
     const checkAnswers = () => {
-        if (initialItems.filter(({isProccess}) => !isProccess).length !== stakeholdersItems.length) { 
+        if (
+            initialItems.filter(({isProccess}) => !isProccess).length 
+            !== stakeholdersItems.filter(({isProccess}) => !isProccess).length
+            || !stakeholdersItems.every(({isProccess}) => !isProccess)
+        ) { 
             setIsCorrect(false);
             setIsIncorrectFinish(true);
         } else {
@@ -227,7 +231,7 @@ export const Game2 = () => {
                             <CSSTransition key={`proccess_${isShowingCorrect}`} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
                                 <GameBlock ratio={ratio} onDrop={handlePushToProccess} isCorrect={isCorrect} hasChildren={!!proccessItems.length}>
                                     {proccessItems.map(item => (
-                                        <ItemStyled key={`proccess_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
+                                        <ItemStyled key={`proccess_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect} isDrag={!isFinish}/>
                                     ))}
                                 </GameBlock>
                             </CSSTransition>
@@ -239,7 +243,7 @@ export const Game2 = () => {
                             <CSSTransition key={isShowingCorrect} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
                                 <GameBlock ratio={ratio} onDrop={handlePushToStakeHolder} isCorrect={isCorrect} hasChildren={!!stakeholdersItems.length}>
                                     {stakeholdersItems.map(item => (
-                                        <ItemStyled key={`stakeholders_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect}/>
+                                        <ItemStyled key={`stakeholders_${item.id}`} {...item} ratio={ratio} isCorrect={isCorrect} isDrag={!isFinish}/>
                                     ))} 
                                 </GameBlock>
                             </CSSTransition>
@@ -249,12 +253,12 @@ export const Game2 = () => {
                 
                 <ListLeft $ratio={ratio} ref={leftRef}>
                     {itemsLeft.map((item) => (
-                        <Item key={item?.id} {...item} ratio={ratio}/>
+                        <Item key={item?.id} {...item} ratio={ratio} isDrag={!isFinish}/>
                     ))}
                 </ListLeft>
                 <ListRight $ratio={ratio} ref={rightRef}>
                     {itemsRight.map((item) => (
-                        <Item key={item?.id} {...item} ratio={ratio}/>
+                        <Item key={item?.id} {...item} ratio={ratio} isDrag={!isFinish}/>
                     ))}
                 </ListRight>
                 {isFinish && !isCorrect && (

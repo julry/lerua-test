@@ -1,8 +1,9 @@
-import {useEffect, useMemo} from "react";
+import {useMemo} from "react";
 import {SwitchTransition, CSSTransition} from "react-transition-group";
 import styled from 'styled-components';
+import { preloadImages } from "../constants/screens";
 import {useProgress} from "../contexts/ProgressContext";
-import { preloadImage } from "../utils/preloadImage";
+import { useImagePreloader } from "../hooks/useImagePreloader";
 
 const SWITCH_DURATION = 500;
 
@@ -34,13 +35,8 @@ const Wrapper = styled.div`
 
 export function ScreenContent() {
     const {screen} = useProgress()
-    const Screen = useMemo(() => screen?.component, [screen])
-
-    useEffect(() => {
-        let preloadImages = screen?.preloadImages;
-        const clears = preloadImages && preloadImages.map(img => preloadImage(img));
-        return () => clears && clears.forEach(clear => clear());
-      }, [screen]);
+    const Screen = useMemo(() => screen?.component, [screen]);
+    useImagePreloader(preloadImages);
 
     return Screen && (
         <SwitchTransition mode='out-in'>

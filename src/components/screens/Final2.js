@@ -6,7 +6,6 @@ import { CommonText } from "../shared/texts/CommonText";
 import { BoldText } from "../shared/texts/BoldText";
 import { InfoBlock } from "../shared/InfoBlock";
 import { ButtonBottom } from "../shared/Button";
-import { useProgress } from "../../contexts/ProgressContext";
 
 const Wrapper = styled.div`
     position: relative;
@@ -49,10 +48,8 @@ const ButtonBottomStyled = styled(ButtonBottom)`
 
 export const Final2 = () => {
     const ratio = useSizeRatio();
-    const {next} = useProgress();
 
-    const handleClick = () => {
-    }
+    const handleClick = () => {};
 
     return (
         <Wrapper $ratio={ratio}>

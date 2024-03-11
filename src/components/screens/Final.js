@@ -55,6 +55,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const Form = styled.div`
+    position: relative;
     margin-bottom:  ${({$ratio}) => $ratio * 9}px;
     width: ${({$ratio}) => $ratio * 300}px;
     padding: ${({$ratio}) => $ratio * 15}px;
@@ -68,7 +69,7 @@ const Form = styled.div`
         content: 'Неверный формат';
         position: absolute;
         top: ${({$ratio}) => $ratio * 7}px;
-        left: ${({$ratio}) => $ratio * 35}px;
+        left: ${({$ratio}) => $ratio * 20}px;
         font-size: ${({$ratio}) => $ratio * 11}px;
         width: 100%;
         height: ${({$ratio}) => $ratio * 11}px;

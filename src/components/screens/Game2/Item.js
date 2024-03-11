@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { useDrag } from 'react-dnd';
-import {mergeRefs} from 'react-merge-refs';
-import { useRef } from "react";
 import { usePreview } from 'react-dnd-multi-backend';
 import { colors } from "../../../constants/colors";
 
@@ -14,7 +12,8 @@ const Line = styled.div`
     font-size: ${({$ratio}) => $ratio * 14}px;
     box-shadow: inset 0 0 0 2px ${({$isCorrect}) => $isCorrect === false ? colors.yellow : colors.green};
     opacity: ${({$opacity}) => $opacity};
-    cursor: grab;
+    cursor: ${({$isDrag}) => $isDrag ? 'grab' : 'default'};
+
     white-space: pre-line;
     
     & + & {
@@ -22,9 +21,7 @@ const Line = styled.div`
     }
 `;
 
-export const Item = ({ id, text, isProccess, ratio, borderColor, className, isCorrect}) => {
-    const $ref = useRef();
-
+export const Item = ({ id, text, isProccess, ratio, borderColor, className, isCorrect, isDrag}) => {
     const [{ isDragging }, drag] = useDrag({
       type: 'item',
       item: () => {
@@ -56,10 +53,11 @@ export const Item = ({ id, text, isProccess, ratio, borderColor, className, isCo
     return (
         <Line 
             className={className}
-            ref={mergeRefs([$ref, drag])} 
+            ref={isDrag ? drag : null} 
             $ratio={ratio} 
             $borderColor={borderColor}
             $isCorrect={isCorrect}
+            $isDrag={isDrag}
         >
             {text}
         </Line>
