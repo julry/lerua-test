@@ -31,6 +31,7 @@ const ButtonStyled = styled.button`
     border-radius: calc(10px * ${({$ratio}) => $ratio});
     font-size: calc(20px * ${({$ratio}) => $ratio});
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     cursor: pointer;
 
     &:disabled {

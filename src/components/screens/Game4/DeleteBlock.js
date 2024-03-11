@@ -97,6 +97,7 @@ const DeletedItem = styled.div`
 
 const Title = styled(CommonText)`
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     text-align: center;
 `;
 

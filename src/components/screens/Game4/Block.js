@@ -19,6 +19,7 @@ const Title = styled(RuleBlock)`
     border-bottom-right-radius: 0;
     height: ${({$ratio}) => $ratio * 48}px;
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     font-size: ${({$ratio}) => $ratio * 10}px;
     white-space: pre-line;
 `;
@@ -40,6 +41,7 @@ const Field = styled.div`
     border-radius: ${({$ratio}) => $ratio * 10}px;
     padding: ${({$ratio}) => $ratio * 10}px;
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     text-align: center;
 
     & p + p {

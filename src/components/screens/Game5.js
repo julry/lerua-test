@@ -20,6 +20,7 @@ const TableTitle = styled(RuleBlock)`
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     margin-top: ${({$ratio}) => $ratio * 7}px;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     font-weight: 700;
     font-size: ${({$ratio}) => $ratio * 12}px;
 `;

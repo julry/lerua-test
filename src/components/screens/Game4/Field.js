@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     padding: ${({$ratio}) => $ratio * 10}px ${({$ratio}) => $ratio * 8}px ${({$ratio}) => $ratio * 12}px;
     font-size: ${({$ratio}) => $ratio * 14}px;
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     margin: 0 ${({$ratio}) => $ratio * 5}px;
     border-radius: ${({$ratio}) => $ratio * 10}px;
 

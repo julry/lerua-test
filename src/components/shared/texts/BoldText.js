@@ -4,4 +4,5 @@ import { colors } from "../../../constants/colors";
 export const BoldText = styled.span`
     font-weight: 700;
     color: ${colors.green};
+    font-family: 'Leroy Merlin Sans', sans-serif;
 `;

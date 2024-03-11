@@ -25,6 +25,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h3`
     font-weight: 700;
+    font-family: 'Leroy Merlin Sans', sans-serif;
     font-size: ${({$ratio}) => $ratio * 28}px;
     color: white;
     text-align: center;

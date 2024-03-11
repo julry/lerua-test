@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Leroy Merlin Sans';
+    src: local('Leroy Merlin Sans'),
+    url('../assets/fonts/leroy-merlin-sans-bold.ttf') format('truetype'),
+    local('Leroy-Merlin-Sans'), local('LeroyMerlinSans');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeroyMerlinSans-Web';
+    src: local('LeroyMerlinSans-Web'),
+    url('../assets/fonts/LeroyMerlinSans-Web-Regular.ttf') format('truetype'),
+    local('Leroy Merlin Sans Web'), local('LeroyMerlinSansWeb');
+    font-weight: 400;
+    font-style: normal;
+}
