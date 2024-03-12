@@ -38,22 +38,13 @@ const Wrapper = styled.div`
     }
 `;
 
-const ManWrapper = styled.div`
+const Man = styled.div`
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 100%;
-    overflow: hidden;
-    height: calc(460px * ${({$ratio}) => $ratio});
-`;
-
-const Man = styled.div`
-    position: absolute;
-    right: calc(0px - 85px * ${({$ratio}) => $ratio});
-    bottom: calc(0px - 27px * ${({$ratio}) => $ratio});
-    width: calc(341px * ${({$ratio}) => $ratio});
-    height: calc(484px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0 /contain;
+    width: calc(256px * ${({$ratio}) => $ratio});
+    height: calc(457px * ${({$ratio}) => $ratio});
+    background: url(${man}) no-repeat 0 0;
 `;
 
 const BlockStyled = styled(InfoBlock)`
@@ -122,9 +113,7 @@ export const Additional = ({ blockInfo, onClick, shown, children }) => {
             classNames={ANIMATION_NAME}
         >
             <Wrapper>
-                <ManWrapper $ratio={ratio}>
-                    <Man $ratio={ratio}/>
-                </ManWrapper>
+                <Man $ratio={ratio}/>
                 <SwitchTransition>
                     <CSSTransition
                         key={part}

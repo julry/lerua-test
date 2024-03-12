@@ -18,22 +18,13 @@ const Wrapper = styled.div`
     z-index: 0;
 `;
 
-const ManWrapper = styled.div`
+const Man = styled.div`
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 100%;
-    overflow: hidden;
-    height: calc(445px * ${({$ratio}) => $ratio});
-`;
-
-const Man = styled.div`
-    position: absolute;
-    right: calc(0px - 63px * ${({$ratio}) => $ratio});
-    bottom: calc(0px - 38px * ${({$ratio}) => $ratio});
-    width: calc(341px * ${({$ratio}) => $ratio});
-    height: calc(484px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0 /contain;
+    width: calc(278px * ${({$ratio}) => $ratio});
+    height: calc(446px * ${({$ratio}) => $ratio});
+    background: url(${man}) no-repeat 0 0;
 `;
 
 const InfoBlockStyled = styled(InfoBlock)`
@@ -53,9 +44,7 @@ export const Final2 = () => {
 
     return (
         <Wrapper $ratio={ratio}>
-            <ManWrapper  $ratio={ratio}>
-                <Man $ratio={ratio}/>
-            </ManWrapper>
+            <Man $ratio={ratio}/>
             <InfoBlockStyled isBigTale taleLeft={92} maxWidth={279} $ratio={ratio}>
                 <CommonText>
                 Вместе нам удалось <BoldText>разработать новую систему учёта и обработки доставок.</BoldText>{' '}

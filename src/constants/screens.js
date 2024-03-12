@@ -16,12 +16,16 @@ import { PathScreen5 } from "../components/screens/PathScreen5";
 import { PathScreen6 } from "../components/screens/PathScreen6";
 
 import astronaut from '../assets/images/astronaut.svg';
-import click from '../assets/images/astronaut.svg';
+import click from '../assets/images/click.svg';
+import bigTale from '../assets/images/bigTale.svg';
+import shortTale from '../assets/images/shortTale.svg';
 import path from '../assets/images/path.png';
 import start2 from '../assets/images/start2.png';
 import start3 from '../assets/images/start3.png';
 import taskBg from '../assets/images/taskBg.png';
 import finalBg from '../assets/images/finalBg.png';
+import explaintipGame3 from '../components/screens/Game3/explainTip.svg';
+import explaintipGame4 from '../components/screens/Game4/explainTip.svg';
 
 export const screens = [
     {
@@ -92,5 +96,6 @@ export const screens = [
 
 
 export const preloadImages = [
-    path, astronaut, click, start2, start3, path, taskBg, finalBg
+    path, astronaut, click, start2, start3, path, taskBg, finalBg,
+    explaintipGame3, explaintipGame4, bigTale, shortTale
 ]

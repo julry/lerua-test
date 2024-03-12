@@ -22,24 +22,16 @@ const Wrapper = styled.div`
     padding: calc(16px * ${({$ratio}) => $ratio}) calc(22px * ${({$ratio}) => $ratio});
     display: flex;
     flex-direction: column;
-`;
-
-const ManWrapper = styled.div`
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 100%;
     overflow: hidden;
-    height: calc(484px * ${({$ratio}) => $ratio});
 `;
 
 const Man = styled.div`
     position: absolute;
-    right: calc(0px - 59px * ${({$ratio}) => $ratio});
-    bottom: calc(0px - 78px * ${({$ratio}) => $ratio});
-    width: calc(341px * ${({$ratio}) => $ratio});
-    height: calc(484px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0 /contain;
+    right: 0;
+    bottom: 0;
+    width: calc(297px * ${({$ratio}) => $ratio});
+    height: calc(406px * ${({$ratio}) => $ratio});
+    background: url(${man}) no-repeat 0 0;
 `;
 
 const ButtonStyled = styled(ButtonBottom)`
@@ -110,9 +102,7 @@ export const Intro3 = () => {
 
     return (
     <Wrapper $ratio={ratio}>
-        <ManWrapper $ratio={ratio}>
-            <Man $ratio={ratio} />
-        </ManWrapper>
+        <Man $ratio={ratio}/>
         {part === 1 && (
             <InfoBlockStyledFirst taleLeft={90} maxWidth={268} $ratio={ratio}>
                 <CommonText>
