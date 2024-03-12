@@ -22,7 +22,7 @@ const ANIMATION_NAME = 'question_animated';
 const ANIMATION_DURATION = 300;
 
 const Wrapper = styled.div`
-    overflow: hidden;
+    overflow: auto;
     background: url(${bg}) no-repeat 0 0 / cover;
     width: 100%;
     height: 100%;
@@ -31,6 +31,14 @@ const Wrapper = styled.div`
     align-items: center;
     ${({$blurred}) => $blurred ? blurredStyle : ''};
     padding: ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 28}px ${({$ratio}) => $ratio * 50}px;
+   
+    @media screen and (max-height: 750px) {
+    ${({$isLast, $ratio}) => $isLast ? 'padding-bottom: ' + ($ratio * 20) + "px;" : ''}
+    }
+
+    @media screen and (max-height: 650px) {
+        padding-bottom: ${({$ratio, $isLast}) => $ratio * ($isLast ? 20 : 30)}px;
+    }
 `;
 
 const Title = styled.h3`
@@ -43,6 +51,10 @@ const Title = styled.h3`
 
 const ContentWrapper = styled(RuleBlock)`
     margin-top: ${({$ratio}) => $ratio * 20}px;
+
+    @media screen and (max-height: 700px) {
+        margin-top: ${({$ratio}) => $ratio * 15}px;
+    }
 `;
 
 const PathWrapper = styled.div`
@@ -135,10 +147,11 @@ const ArrowLeft = styled(ArrowBtn)`
     left: 0;
     justify-content: flex-start;
     padding-left: ${({$ratio}) => $ratio * 10}px;
+    background-color: ${colors.gray};
 `;
 
 const AnswerInfo = styled(RuleBlock)`
-    margin-top: auto;
+    margin-top: ${({$ratio}) => $ratio * 5}px;
     margin-bottom: ${({$ratio}) => $ratio * 13}px;
     height: ${({$ratio}) => $ratio * 38}px;
     display: flex;
@@ -176,14 +189,18 @@ const AnswerWrapper = styled.div`
     cursor: pointer;
     font-weight: 700;
     font-family: 'Leroy Merlin Sans', sans-serif;
+
+    @media screen and (max-height: 700px) {
+        margin-top: ${({$ratio}) => $ratio * 10}px;
+    }
 `;
 
 const ExplainingStyled = styled(Explaining)`
-  padding: ${({$ratio}) => $ratio * 25}px ${({$ratio}) => $ratio * 20}px;
+    padding: ${({$ratio}) => $ratio * 25}px ${({$ratio}) => $ratio * 20}px;
 `;
 
 const ButtonStyled = styled(Button)`
-   margin-bottom: ${({$isMargin, $ratio}) => $isMargin ?  $ratio * 10 : 0}px;
+    margin-bottom: ${({$isMargin, $ratio}) => $isMargin ?  $ratio * 10 : 0}px;
 `;
 
 const LastExplainBtn = styled(Button)`
@@ -204,8 +221,17 @@ const ExplainTip = styled.div`
     background: url(${explainTip}) no-repeat center 0 / contain;
 `;
 
+const ButtonLast = styled(Button)`
+    margin-top: ${({$ratio}) => $ratio * 10}px;
+
+    @media screen and (max-height: 650px) {
+        margin-top: ${({$ratio}) => $ratio * 5}px;
+    }
+`;
+
 export const Game3 = () => {
     const ratio = useSizeRatio();
+    const [isIntro, setIsIntro] = useState(true);
     const [answers, setAnswers] = useState({1: undefined});
     const [isExplain, setIsExplain] = useState(false);
     const [isAllCorrect, setIsAllCorrect] = useState(true);
@@ -252,7 +278,7 @@ export const Game3 = () => {
 
     return (
         <>
-            <Wrapper $ratio={ratio}>
+            <Wrapper $ratio={ratio} $isLast={question === 3 && answers[3]}>
                 <Title $ratio={ratio}>
                     ЭТАП 3
                 </Title>
@@ -318,11 +344,9 @@ export const Game3 = () => {
                 {
                     answers[question] ? (
                         <ExplainBtnWrapper>  
-                            {!isLastExplained && (
-                                <AnswerInfo $ratio={ratio}>
-                                    {curQuestion.correct === answers[question] ? curQuestion.correctText : curQuestion.incorrectText}
-                                </AnswerInfo>
-                            )}
+                            <AnswerInfo $ratio={ratio}>
+                                {curQuestion.correct === answers[question] ? curQuestion.correctText : curQuestion.incorrectText}
+                            </AnswerInfo>
                             <ButtonStyled 
                                 type="dark" 
                                 onClick={() => setIsExplain(true)} 
@@ -331,13 +355,47 @@ export const Game3 = () => {
                             >
                                 ПОЯСНЕНИЕ
                             </ButtonStyled>
-                            {isLastExplained && (
-                                <Button onClick={() => setIsFinish(true)}>ДАЛЕЕ</Button>
+                            {question === 3 && (
+                                <ButtonLast $ratio={ratio} onClick={() => setIsFinish(true)}>ДАЛЕЕ</ButtonLast>
                             )}
                         </ExplainBtnWrapper>
                     ) : <ButtonBottom disabled={!answer} onClick={handleAnswer}>ОТВЕТИТЬ</ButtonBottom>
                 }
             </Wrapper>
+            <Additional 
+                shown={isIntro}
+                onClick={() => setIsIntro(false)}
+                blockInfo={
+                    [
+                        {
+                            text: 
+                            <CommonText>
+                                Всё идёт по плану — поставщики ещё охотнее соглашаются на сотрудничество,{' '}
+                                и всё больше аналитиков хотят прилететь на Планету! Мы с тобой как раз на этапе{' '}
+                                обустройства <BoldText>технологичных офисов и опенспейсов</BoldText> для коллег.{'\n\n'}
+                                Повышаем градус сложности — <BoldText>чем больше заинтересованных лиц, тем больше разных требований</BoldText>.{' '}
+                                Пора в них разобраться и навести порядок.
+                            </CommonText>,
+                            isBigTale: true,
+                            maxWidth: 333,
+                            taleLeft: 92,
+                            top: 5,
+                        },
+                        {
+                            text: 
+                            <CommonText>
+                               Функциональное, пользовательское или бизнес?{'\n'}Твои коллеги уже составили{' '}
+                               список требований. Твоя задача — <BoldText>определить уровень</BoldText> каждого.{' '}
+                               Потренируйся на этих трёх — выбирай для каждого верный ответ из предложенных.
+                            </CommonText>,
+                            isBigTale: true,
+                            maxWidth: 265,
+                            taleLeft: 92,
+                            top: 35,
+                        }
+                    ]
+                }
+            />
             <ExplainingStyled shown={isExplain} onClick={handleCloseExplain} $ratio={ratio}>
                 {curQuestion.explain}
             </ExplainingStyled>

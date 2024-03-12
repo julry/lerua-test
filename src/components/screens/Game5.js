@@ -57,9 +57,7 @@ const AnswerWrapper = styled.div`
     box-shadow: inset 0 0 0 2px ${({$bg}) => $bg ? 'rgba(0,0,0,0.2)' : colors.yellow};
     transition: color .3s, box-shadow .3s, background-color .3s;
     cursor: pointer;
-    overflow-x: scroll;
     border-radius: ${({$ratio}) => $ratio * 5}px;
-    padding-bottom: ${({$ratio}) => $ratio * 24}px;
     ${({$isChosen, $bg}) => $isChosen && !$bg ? chosenStyles : ''};
 
     & + & {
@@ -67,21 +65,9 @@ const AnswerWrapper = styled.div`
     }
 
     & p {
-     white-space: pre-line;
-        font-size: ${({$ratio}) => $ratio * 14}px;
+        white-space: pre-line;
+        font-size: ${({$ratio}) => $ratio * 12}px;
         width: max-content;
-    }
-    scrollbar-color: transparent transparent;
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: ${({$ratio}) => $ratio * 10}px;
-        left: ${({$ratio}) => $ratio * 8}px;
-        background: currentColor;
-        height: 3px;
-        width: ${({$ratio}) => $ratio * 34}px;
-        border-radius: 17px;
     }
 `;
 
@@ -203,9 +189,9 @@ export const Game5 = () => {
                     onClick={() => handlePickAnswer(1)}
                     $bg={getAnswerBg(1)}
                 >
-                    <p>SELECT os.status_name, COUNT(o.order_id) AS orders_count{'\n'}</p>
+                    <p>SELECT os.status_name, COUNT(o.order_id){'\n'}AS orders_count{'\n'}</p>
                     <p>FROM Orders o{'\n'}</p>
-                    <p>INNER JOIN OrderStatus os ON o.status_id = os.status_id{'\n'}</p>
+                    <p>INNER JOIN OrderStatus os{'\n'}ON o.status_id = os.status_id{'\n'}</p>
                     <p>GROUP BY os.status_name{'\n'}</p>
                     <p>ORDER BY orders_count DESC;</p>
                 </AnswerWrapper>
@@ -217,7 +203,7 @@ export const Game5 = () => {
                 >
                     <p>SELECT status_name, COUNT(order_id){'\n'}</p>
                     <p>FROM Orders{'\n'}</p>
-                    <p>JOIN OrderStatus ON Orders.status_id = OrderStatus.status_id{'\n'}</p>
+                    <p>JOIN OrderStatus{'\n'}ON Orders.status_id = OrderStatus.status_id{'\n'}</p>
                     <p>ORDER BY COUNT(order_id) DESC;</p>
                 </AnswerWrapper>
                 <AnswerWrapper
@@ -226,7 +212,7 @@ export const Game5 = () => {
                     onClick={() => handlePickAnswer(3)} 
                     $bg={getAnswerBg(3)}
                 >
-                    <p>SELECT os.status_name, COUNT(*) AS orders_count{'\n'}</p>
+                    <p>SELECT os.status_name,{'\n'}COUNT(*) AS orders_count{'\n'}</p>
                     <p>FROM OrderStatus os{'\n'}</p>
                     <p>LEFT JOIN Orders o ON os.status_id = o.status_id{'\n'}</p>
                     <p>GROUP BY os.status_name{'\n'}</p>
@@ -240,7 +226,7 @@ export const Game5 = () => {
                 >
                     <p>SELECT status_name, SUM(total_amount){'\n'}</p>
                     <p>FROM Orders{'\n'}</p>
-                    <p>JOIN OrderStatus ON OrderStatus.status_id = Orders.status_id{'\n'}</p>
+                    <p>JOIN OrderStatus{'\n'}ON OrderStatus.status_id = Orders.status_id{'\n'}</p>
                     <p>GROUP BY status_name{'\n'}</p>
                     <p>ORDER BY SUM(total_amount) DESC;</p>
                 </AnswerWrapper>

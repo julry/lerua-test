@@ -67,6 +67,8 @@ const Blocks = styled.div`
 const InfoBlockStyled = styled(InfoBlock)`
     padding-right: calc(10px * ${({$ratio}) => $ratio});
 
+    ${({$withoutMargin, $ratio}) => $withoutMargin ? 'padding-bottom:' + $ratio * 8 +'px' : ''};
+
     & + & {
         margin-top: calc(10px * ${({$ratio}) => $ratio});
     }
@@ -106,7 +108,7 @@ export const Intro3 = () => {
         {part === 1 && (
             <InfoBlockStyledFirst taleLeft={90} maxWidth={268} $ratio={ratio}>
                 <CommonText>
-                    С прибытием{'\n'}на <BoldText>«Планету аналитиков»!</BoldText>{'\n\n'}
+                    С прибытием{'\n'}на <BoldText>Планету аналитиков!</BoldText>{'\n\n'}
                     Мы с коллегами открыли её совсем недавно и обнаружили, что она пригодна для жизни.{' '} 
                     В будущем здесь будут работать аналитики Леруа Мерлен. Но пока это невозможно — на планете ещё нет{' '} 
                     ни одного объекта инфраструктуры.{'\n\n'}
@@ -116,12 +118,12 @@ export const Intro3 = () => {
         )}
         <Blocks $ratio={ratio}>
             <CSSTransition in={part === 2} mountOnEnter unmountOnExit timeout={ANIMATION_DURATION} classNames={ANIMATION_NAME}>
-                <InfoBlockStyled maxWidth={268} $ratio={ratio}>
+                <InfoBlockStyled maxWidth={254} $ratio={ratio} $withoutMargin>
                     <CommonText>
                         Обустройство на Планете — сложный процесс. Но если 
                         его проанализировать, то можно разбить на более простые этапы. 
-                        Давай <BoldText>начнём с системы доставки ресурсов</BoldText> с Земли на Планету, которую мы 
-                        разработаем вместе моими коллегами из Леруа Мерлен.
+                        Давай <BoldText>начнём с системы доставки ресурсов</BoldText> с Земли на Планету, которую мы{' '}
+                        разработаем вместе c моими коллегами из Леруа Мерлен.
                     </CommonText>
                 </InfoBlockStyled>
             </CSSTransition> 
@@ -129,12 +131,12 @@ export const Intro3 = () => {
                 <InfoBlockStyled taleLeft={98} maxWidth={268} $ratio={ratio}>
                     <CommonText>
                         Тебе предстоит <BoldText>пошагово решать этот кейс</BoldText> — каждое выполненное задание 
-                        будет приближать нашу «Планету аналитиков» к моменту заселения первыми жителями!
+                        будет приближать нашу Планету аналитиков к моменту заселения первыми жителями!
                     </CommonText>
                 </InfoBlockStyled>
             </CSSTransition>
         </Blocks>
-        {part === 1 ? <AnimatedButtonStyled onClick={handleClick}/> : <ButtonStyled onClick={handleClick}>ПОЕХАЛИ!</ButtonStyled>}
+        {part === 1 ? <AnimatedButtonStyled onClick={handleClick}/> : <ButtonStyled onClick={handleClick}>ИГРАТЬ</ButtonStyled>}
     </Wrapper>
     )
 }
