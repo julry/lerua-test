@@ -40,11 +40,11 @@ const Wrapper = styled.div`
 
 const Man = styled.div`
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: calc(256px * ${({$ratio}) => $ratio});
-    height: calc(457px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0;
+    right: calc(0px - 85px * ${({$ratio}) => $ratio});
+    bottom: calc(0px - 27px * ${({$ratio}) => $ratio});
+    width: calc(341px * ${({$ratio}) => $ratio});
+    height: calc(490px * ${({$ratio}) => $ratio});
+    background: url(${man}) no-repeat 0 0 /cover;
 `;
 
 const BlockStyled = styled(InfoBlock)`

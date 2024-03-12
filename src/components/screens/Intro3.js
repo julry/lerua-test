@@ -27,11 +27,11 @@ const Wrapper = styled.div`
 
 const Man = styled.div`
     position: absolute;
-    right: 0;
-    bottom: 0;
-    width: calc(297px * ${({$ratio}) => $ratio});
-    height: calc(406px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0;
+    right: calc(0px - 59px * ${({$ratio}) => $ratio});
+    bottom: calc(0px - 82px * ${({$ratio}) => $ratio});
+    width: calc(341px * ${({$ratio}) => $ratio});
+    height: calc(490px * ${({$ratio}) => $ratio});
+    background: url(${man}) no-repeat 0 0 /cover;
 `;
 
 const ButtonStyled = styled(ButtonBottom)`
