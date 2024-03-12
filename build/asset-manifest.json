@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./static/css/main.807be5db.css",
-    "main.js": "./static/js/main.f24f354f.js",
+    "main.js": "./static/js/main.770216a9.js",
     "static/media/path.png": "./static/media/path.9d1f4b6990a4610305fa.png",
     "static/media/finalBg.png": "./static/media/finalBg.7d55ee75047985c45901.png",
     "static/media/start3.png": "./static/media/start3.0ac43f1a70e20698b516.png",
@@ -11,17 +11,17 @@
     "static/media/taskBg.png": "./static/media/taskBg.7a036d7a1cb8ce8fcb47.png",
     "static/media/LeroyMerlinSans-Web-Regular.ttf": "./static/media/LeroyMerlinSans-Web-Regular.0359ba103b2d7bb0ffd3.ttf",
     "static/media/startAstronaut.svg": "./static/media/startAstronaut.54054787fc6d978ab128baef25a8140b.svg",
-    "static/media/astronaut.svg": "./static/media/astronaut.2fb2a07bc6ba47aa103bfe42a20b0752.svg",
+    "static/media/astronaut.svg": "./static/media/astronaut.6524106e81bcd5ae36f99631f8299cdc.svg",
     "static/media/explainTip.svg": "./static/media/explainTip.ef946ca7fbe19aac5f4a593cbdc5f582.svg",
     "static/media/click.svg": "./static/media/click.5358c12edc5ed8e49ed4af6ae4bcf44c.svg",
     "static/media/bigTale.svg": "./static/media/bigTale.5efd555eb94e4efe2b8c966c98de2256.svg",
     "static/media/shortTale.svg": "./static/media/shortTale.a10135ea5b3fe85bd0f5db348b1b10e5.svg",
     "index.html": "./index.html",
     "main.807be5db.css.map": "./static/css/main.807be5db.css.map",
-    "main.f24f354f.js.map": "./static/js/main.f24f354f.js.map"
+    "main.770216a9.js.map": "./static/js/main.770216a9.js.map"
   },
   "entrypoints": [
     "static/css/main.807be5db.css",
-    "static/js/main.f24f354f.js"
+    "static/js/main.770216a9.js"
   ]
 }
