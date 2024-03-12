@@ -30,7 +30,7 @@ const Man = styled.div`
     bottom: 0;
     width: calc(295px * ${({$ratio}) => $ratio});
     height: calc(443px * ${({$ratio}) => $ratio});
-    background: url(${man}) no-repeat 0 0 /contain;
+    background: url(${man}) no-repeat 0 0 /cover;
 `;
 
 const Info = styled.div`
