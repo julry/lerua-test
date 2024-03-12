@@ -237,7 +237,7 @@ export const Final = () => {
                         </span>
                     </RadioButtonLabel>
                 </Form>
-                <Button onClick={handleSubmit} disabled={isSending || !isCorrect || !isAgreed}>УЧАСТВОВАТЬ</Button>
+                <Button onClick={handleSubmit} disabled={!email || isSending || !isCorrect || !isAgreed}>УЧАСТВОВАТЬ</Button>
             </ButtonWrapper>
         </Wrapper>
     )

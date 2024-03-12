@@ -13,6 +13,7 @@ const Line = styled.div`
     font-size: ${({$ratio}) => $ratio * 16}px;
     box-shadow: inset 0 0 0 2px ${({$borderColor}) => $borderColor ?? colors.green};
     opacity: ${({$opacity}) => $opacity};
+    order: ${({$order}) => $order};
     cursor: ${({$isDrag}) => $isDrag ? 'grab' : 'default'};
 
     & + & {
@@ -95,6 +96,7 @@ export const Item = ({ id, text, index, moveItem, ratio, borderColor, order, isD
             $ratio={ratio} 
             $borderColor={borderColor}
             $isDrag={isDrag}
+            $order={order}
         >
             {text}
         </Line>
