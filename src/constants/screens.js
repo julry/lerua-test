@@ -13,7 +13,6 @@ import { PathScreen2 } from "../components/screens/PathScreen2";
 import { PathScreen3 } from "../components/screens/PathScreen3";
 import { PathScreen4 } from "../components/screens/PathScreen4";
 import { PathScreen5 } from "../components/screens/PathScreen5";
-import { PathScreen6 } from "../components/screens/PathScreen6";
 
 import astronaut from '../assets/images/astronaut.svg';
 import click from '../assets/images/click.svg';
@@ -82,14 +81,10 @@ export const screens = [
     },
     {
         id: 13,
-        component: PathScreen6
-    }, 
-    {
-        id: 14,
         component: Final
     },
     {
-        id: 15,
+        id: 14,
         component: Final2
     }
 ];
