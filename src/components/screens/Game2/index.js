@@ -73,20 +73,16 @@ const BlockTitle = styled.div`
     align-items: flex-start;
 `;
 
-const InfoTitleButton = styled.div`
+const InfoTitleButton = styled(Button)`
     width: ${({$ratio}) => $ratio * 26}px;
     height: ${({$ratio}) => $ratio * 26}px;
-    box-shadow: inset 0 0 0 2px ${colors.green};
-    background-color: ${colors.gray};
     border-radius: ${({$ratio}) => $ratio * 8}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: ${({$ratio}) => $ratio * 18}px;
     margin-top: ${({$ratio}) => $ratio * 2}px;
     font-family: 'LeroyMerlinSans-Web';
     font-weight: 400;
-    color: ${colors.green};
+    margin: 0;
+    padding-bottom: 0;
     padding-top: ${({$ratio}) => $ratio * 2}px;
 `;
 
@@ -251,6 +247,7 @@ export const Game2 = () => {
                            <span>УЧАСТНИКИ{'\n'}ПРОЦЕССА</span>
                             <InfoTitleButton  
                                 $ratio={ratio}
+                                type="dark"
                                 onClick={() => setIsExplain({shown: true, text: ProccessExplain})}
                             > 
                                 i 
@@ -270,6 +267,7 @@ export const Game2 = () => {
                         <BlockTitle $ratio={ratio}>
                             <span> ПЕРВИЧНЫЕ{'\n'}СТЕЙКХОЛДЕРЫ</span>
                             <InfoTitleButton 
+                                type="dark"
                                 $ratio={ratio}
                                 onClick={() => setIsExplain({shown: true, text: StakeholderExplain})}
                             > 
