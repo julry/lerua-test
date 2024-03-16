@@ -230,7 +230,7 @@ export const Game5 = () => {
                     <p>GROUP BY status_name{'\n'}</p>
                     <p>ORDER BY SUM(total_amount) DESC;</p>
                 </AnswerWrapper>
-                <IncorrectText $ratio={ratio} opacity={+!isCorrect}>Верный ответ был совсем рядом…</IncorrectText>
+                <IncorrectText $ratio={ratio} opacity={+isAnswered}>{isCorrect ? 'Абсолютно верно!' : 'Верный ответ был совсем рядом…'}</IncorrectText>
             </Answers>
         </GameWrapper>
         <Additional

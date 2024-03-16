@@ -24,6 +24,7 @@ const Block = styled(InfoBlock)`
     left: 50%;
     transform: translate(-50%, -50%);
     width: ${({$ratio}) => 319 * $ratio}px;
+    padding: ${({$ratio}) => 25 * $ratio}px ${({$ratio}) => 20 * $ratio}px;
 
     &.${ANIMATION_NAME}-enter {
         opacity: 0;

@@ -14,7 +14,7 @@ import { RuleBlock } from "../../shared/RuleBlock";
 import { initialItems2 as initialItems } from "./items";
 import { Item } from "./Item";
 import { GameBlock } from "./GameBlock";
-import { SWITCH_DURATION, SWITCH_NAME } from "./constants";
+import { SWITCH_DURATION, SWITCH_NAME, AnswerExplain, ProccessExplain, StakeholderExplain } from "./constants";
 
 const Wrapper = styled(GameWrapper)`
     padding-left: ${({$ratio}) => $ratio * 23}px;
@@ -62,11 +62,32 @@ const ListRight = styled(List)`
     right: ${({$ratio}) => $ratio * 38}px;
 `;
 
-const BlockTitle = styled.h3`
+const BlockTitle = styled.div`
     white-space: pre-line;
     font-size: ${({$ratio}) => $ratio * 14}px;
     margin-bottom: ${({$ratio}) => $ratio * 10}px;
-    text-align: center;
+    font-size: 700;
+    font-family: 'Leroy Merlin Sans';
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+`;
+
+const InfoTitleButton = styled.div`
+    width: ${({$ratio}) => $ratio * 26}px;
+    height: ${({$ratio}) => $ratio * 26}px;
+    box-shadow: inset 0 0 0 2px ${colors.green};
+    background-color: ${colors.gray};
+    border-radius: ${({$ratio}) => $ratio * 8}px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: ${({$ratio}) => $ratio * 18}px;
+    margin-top: ${({$ratio}) => $ratio * 2}px;
+    font-family: 'LeroyMerlinSans-Web';
+    font-weight: 400;
+    color: ${colors.green};
+    padding-top: ${({$ratio}) => $ratio * 2}px;
 `;
 
 const ItemStyled = styled(Item)`
@@ -101,7 +122,7 @@ export const Game2 = () => {
     const [isCorrect, setIsCorrect] = useState(true);
     const [isIncorrectFinish, setIsIncorrectFinish] = useState(false);
     const [finalModal, setFinalModal] = useState({shown: false, winText: false});
-    const [isExplain, setIsExplain] = useState(false);
+    const [isExplain, setIsExplain] = useState({shown: false, text: ''});
     const [isShowingCorrect, setIsShowingCorrect] = useState(false);
     const {next} = useProgress();
     const ratio = useSizeRatio();
@@ -226,7 +247,15 @@ export const Game2 = () => {
                 </ContentWrapper>
                 <BlocksWrapper>
                     <Block $ratio={ratio} ref={leftListRef}>
-                        <BlockTitle $ratio={ratio}>УЧАСТНИКИ{'\n'}ПРОЦЕССА</BlockTitle>
+                        <BlockTitle $ratio={ratio}>
+                           <span>УЧАСТНИКИ{'\n'}ПРОЦЕССА</span>
+                            <InfoTitleButton  
+                                $ratio={ratio}
+                                onClick={() => setIsExplain({shown: true, text: ProccessExplain})}
+                            > 
+                                i 
+                            </InfoTitleButton>
+                            </BlockTitle>
                         <SwitchTransition mode='out-in'>
                             <CSSTransition key={`proccess_${isShowingCorrect}`} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
                                 <GameBlock ratio={ratio} onDrop={handlePushToProccess} isCorrect={isCorrect} hasChildren={!!proccessItems.length}>
@@ -238,7 +267,15 @@ export const Game2 = () => {
                         </SwitchTransition>
                     </Block>
                     <Block $ratio={ratio} ref={rightListRef}>
-                        <BlockTitle $ratio={ratio}>ПЕРВИЧНЫЕ{'\n'}СТЕЙКХОЛДЕРЫ</BlockTitle>
+                        <BlockTitle $ratio={ratio}>
+                            <span> ПЕРВИЧНЫЕ{'\n'}СТЕЙКХОЛДЕРЫ</span>
+                            <InfoTitleButton 
+                                $ratio={ratio}
+                                onClick={() => setIsExplain({shown: true, text: StakeholderExplain})}
+                            > 
+                                i 
+                            </InfoTitleButton>
+                        </BlockTitle>
                         <SwitchTransition mode='out-in'>
                             <CSSTransition key={isShowingCorrect} timeout={SWITCH_DURATION} classNames={SWITCH_NAME}>
                                 <GameBlock ratio={ratio} onDrop={handlePushToStakeHolder} isCorrect={isCorrect} hasChildren={!!stakeholdersItems.length}>
@@ -265,20 +302,11 @@ export const Game2 = () => {
                     <IncorrectInfo $ratio={ratio}>Кажется, здесь что-то перепутано.{'\n'}Сейчас поправим!</IncorrectInfo>
                 )}
                 {isIncorrectFinish && isCorrect && (
-                    <InfoButton type="dark" $ratio={ratio} onClick={() => setIsExplain(true)}>ПОЯСНЕНИЕ</InfoButton>
+                    <InfoButton type="dark" $ratio={ratio} onClick={() => setIsExplain({shown: true, text: AnswerExplain})}>ПОЯСНЕНИЕ</InfoButton>
                 )}
             </Wrapper>
-            <Explaining shown={isExplain} onClick={() => setIsExplain(false)}>
-                <CommonText>
-                К <BoldText>стейкхолдерам</BoldText> относятся все лица, заинтересованные в результате разработки.{'\n\n'}
-                <BoldText>Участниками процесса</BoldText> являются те лица, которые напрямую взаимодействуют с системой{' '}
-                и связаны с фактом её разработки.{'\n\n'}
-                <BoldText>Первичные стейкхолдеры</BoldText> имеют непосредственное отношение{' '}
-                к проекту и его исходу. Обычно включают в себя клиентов (или пользователей),{' '}
-                сотрудников компании, участвующих в проекте напрямую, владельцев бизнеса, инвесторов{' '}
-                и других людей или группы с прямым финансовым интересом. К ним также относятся регуляторы{' '}
-                или другие лица, имеющие законные права в отношении проекта.        
-                </CommonText>
+            <Explaining shown={isExplain.shown} onClick={() => setIsExplain(prev => ({...prev, shown: false}))}>
+                {isExplain.text}
             </Explaining>
             <Additional 
                 shown={finalModal.shown}
