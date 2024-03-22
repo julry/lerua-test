@@ -23,7 +23,7 @@ const Wrapper = styled(GameWrapper)`
 `;
 
 const ContentWrapper = styled(RuleBlock)`
-    margin-top: ${({$ratio}) => $ratio * 20}px;
+    margin-top: ${({$ratio}) => $ratio * 10}px;
     padding: ${({$ratio}) => $ratio * 5}px ${({$ratio}) => $ratio * 20}px;
 `;
 
@@ -97,6 +97,10 @@ const InfoButton = styled(Button)`
     bottom: ${({$ratio}) => $ratio * 112}px;
     left: 50%;
     transform: translateX(-50%);
+
+    @media screen and (max-height: 650px) {
+        bottom: calc(92px * ${({$ratio}) => $ratio});
+    }
 `;
 
 const IncorrectInfo = styled(ContentWrapper)`
@@ -216,7 +220,7 @@ export const Game2 = () => {
                     {
                         text: <CommonText>
                             Сложные ресурсы более капризны — они требуют особых условий доставки. 
-                            А значит и участников процесса становится все больше, поэтому важно точно понимать, 
+                            А значит и участников процесса становится всё больше, поэтому важно точно понимать, 
                             кто из стейкхолдеров — <BoldText>участники процесса.</BoldText>{' '}
                             Именно они будут сильнее всего влиять на доставку.{'\n\n'}
                             Так как этой сложной задачей занимается Леруа Мерлен, то к процессу подключатся мои коллеги 

@@ -53,6 +53,11 @@ const InfoBlockStyledFirst = styled(InfoBlock)`
     @media screen and (min-height: 700px) {
         bottom: ${({$ratio}) => $ratio * 425}px;
     }
+
+    @media screen and (min-width: 640px) {
+        bottom: auto;
+        top: ${({$ratio}) => $ratio * 21}px;
+    }
 `;
 
 const Blocks = styled.div`
@@ -62,6 +67,11 @@ const Blocks = styled.div`
     @media screen and (min-height: 700px) {
         bottom: ${({$ratio}) => $ratio * 425}px;
     }
+
+    @media screen and (min-width: 640px) {
+        bottom: auto;
+        top: ${({$ratio}) => $ratio * 21}px;
+    }
 `;
 
 const InfoBlockStyled = styled(InfoBlock)`
@@ -70,7 +80,7 @@ const InfoBlockStyled = styled(InfoBlock)`
     ${({$withoutMargin, $ratio}) => $withoutMargin ? 'padding-bottom:' + $ratio * 8 +'px' : ''};
 
     & + & {
-        margin-top: calc(10px * ${({$ratio}) => $ratio});
+        margin-top: calc(5px * ${({$ratio}) => $ratio});
     }
 
     &.${ANIMATION_NAME}-enter {
