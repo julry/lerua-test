@@ -65,10 +65,13 @@ const Field = styled.div`
         transform: translateX(-50%);
         background: ${({$isFinish, $borderColor}) => $isFinish ? $borderColor : 'transparent'};
     }
+    
+    @media screen and (min-width: 450px) and (max-height: 720px) {
+        height: ${({$ratio}) => $ratio * 95}px;
+    }
 `;
 
 const TextWrapper = styled.div`
-
     &.${SWITCH_NAME}-enter {
         opacity: 0;
     }
@@ -85,6 +88,11 @@ const TextWrapper = styled.div`
     &.${SWITCH_NAME}-exit-active {
         opacity: 0;
         transition: opacity ${SWITCH_DURATION}ms;
+    }
+
+    & p {
+        width: 100%;
+        text-align: center;
     }
 `;
 

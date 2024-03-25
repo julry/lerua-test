@@ -54,7 +54,7 @@ const InfoBlockStyledFirst = styled(InfoBlock)`
         bottom: ${({$ratio}) => $ratio * 425}px;
     }
 
-    @media screen and (min-width: 640px) {
+    @media screen and (min-width: 450px) {
         bottom: auto;
         top: ${({$ratio}) => $ratio * 21}px;
     }
@@ -68,7 +68,7 @@ const Blocks = styled.div`
         bottom: ${({$ratio}) => $ratio * 425}px;
     }
 
-    @media screen and (min-width: 640px) {
+    @media screen and (min-width: 450px) {
         bottom: auto;
         top: ${({$ratio}) => $ratio * 21}px;
     }

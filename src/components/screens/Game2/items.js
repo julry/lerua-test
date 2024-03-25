@@ -1,7 +1,7 @@
 export const initialItems2 = [
     {
         id: 1,
-        text: 'Руководитель\nнаправления\nот Логистики',
+        text: 'Руководитель\nнаправления\nот логистики',
         isProccess: true,
     }, 
     {

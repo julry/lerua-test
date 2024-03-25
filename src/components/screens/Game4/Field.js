@@ -17,6 +17,10 @@ const Wrapper = styled.div`
     & + & {
         margin-left: 0;
     }
+
+    & p {
+        width: max-content;
+    }
 `;
 
 export const Field = ({text, id, isPicked, ratio, ...rest}) => {
@@ -39,7 +43,7 @@ export const Field = ({text, id, isPicked, ratio, ...rest}) => {
 
         return (
             <Wrapper style={{...style, zIndex: 9}} $ratio={ratio}>
-                {text}
+                 <p>{text}</p>
             </Wrapper>
         );
     };
@@ -49,7 +53,7 @@ export const Field = ({text, id, isPicked, ratio, ...rest}) => {
         return (
             <>
                 <Wrapper $ratio={ratio} $isPicked>
-                    {text}
+                    <p>{text}</p>
                 </Wrapper>
                 <FieldPreview />
             </>
@@ -57,7 +61,7 @@ export const Field = ({text, id, isPicked, ratio, ...rest}) => {
     }
     return (
         <Wrapper ref={drag} $isPicked={isPicked} $ratio={ratio}>
-            {text}
+             <p>{text}</p>
         </Wrapper>
     )
 }

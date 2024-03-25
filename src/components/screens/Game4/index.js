@@ -19,8 +19,8 @@ import { Button } from "../../shared/Button";
 import { Explaining } from "../../shared/Explaining";
 
 const Wrapper = styled(GameWrapper)`
-    padding-left: ${({$ratio}) => $ratio * 26}px;
-    padding-right: ${({$ratio}) => $ratio * 26}px;
+    padding-left: ${({$ratio}) => $ratio * 20}px;
+    padding-right: ${({$ratio}) => $ratio * 20}px;
     padding-bottom: ${({$ratio}) => $ratio * 26}px;
     position: relative;
 
@@ -30,7 +30,7 @@ const Wrapper = styled(GameWrapper)`
 `;
 
 const ContentWrapper = styled(RuleBlock)`
-    margin-top: ${({$ratio}) => $ratio * 20}px;
+    margin-top: ${({$ratio}) => $ratio * 10}px;
     margin-bottom: ${({$ratio}) => $ratio * 5}px;
     padding: ${({$ratio}) => $ratio * 5}px ${({$ratio}) => $ratio * 20}px;
 `;
@@ -62,6 +62,10 @@ const Line = styled.div`
     & + & {
         margin-top: ${({$ratio}) => $ratio * 5}px;
     }
+
+    & p {
+        width: max-content;
+    }
 `;
 
 const BlockTipWrapper = styled.div`
@@ -71,6 +75,10 @@ const BlockTipWrapper = styled.div`
     bottom: ${({$ratio}) => -106 * $ratio}px;
     border-radius: ${({$ratio}) => 8 * $ratio}px;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+
+    @media screen and (min-width: 450px) and (max-height: 720px) {
+        bottom: ${({$ratio}) => $ratio * -91}px;
+    }
 `;
 
 const Dumb = styled.div`
@@ -301,12 +309,12 @@ export const Game4 = () => {
                     Перетаскивай плашки с кусочками текста в соответствующие столбцы — части структуры User Story.
                 </ContentWrapper>
                 <Box $ratio={ratio}>
-                    <Line  $ratio={ratio}>
+                    <Line $ratio={ratio}>
                         <CommonText>Как</CommonText>
                         <Field {...allWords[0]} ratio={ratio}/>
                         <Field {...allWords[1]} ratio={ratio}/>
                     </Line>
-                    <Line  $ratio={ratio}>
+                    <Line $ratio={ratio}>
                         <CommonText>я хочу, чтобы</CommonText>
                         <Field {...allWords[2]} ratio={ratio}/>
                         <Field {...allWords[3]} ratio={ratio}/>

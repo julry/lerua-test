@@ -59,7 +59,7 @@ const BlockStyled = styled(InfoBlock)`
         bottom: 460px;
     }
 
-    @media screen and (min-width: 640px) {
+    @media screen and (min-width: 450px) {
         bottom: auto;
         transform: none;
         top: ${({$top, $ratio}) => $ratio * ($top ?? 35)}px;

@@ -1,7 +1,7 @@
 export const words = [
     {
         id: 0,
-        text: 'Логист',
+        text: 'логист',
         isRole: true,
     },
     {
