@@ -4,6 +4,7 @@ import man from '../../assets/images/startAstronaut.svg';
 import { colors } from '../../constants/colors';
 import { useProgress } from '../../contexts/ProgressContext';
 import { useSizeRatio } from '../../contexts/SizeRatioContext';
+import { reachMetrikaGoal } from '../../utils/reachMetrikaGoal';
 import { Button } from '../shared/Button';
 import { InfoBlock } from '../shared/InfoBlock';
 import { BoldText } from '../shared/texts/BoldText';
@@ -54,23 +55,28 @@ export const Intro = () => {
     const {next} = useProgress();
     const ratio = useSizeRatio();
 
+    const handleNext = () => {
+        reachMetrikaGoal('start');
+        next();
+    }
+    
     return (
-    <Wrapper $ratio={ratio}>
-        <Man $ratio={ratio} />
-        <InfoBlockStyled isBigTale taleLeft={92} maxWidth={240} $ratio={ratio}>
-            <CommonText isBig>
-            Приветствую на борту космического корабля!{'\n\n'}
-            Скоро мы отправимся в путешествие на «Планету аналитиков» с Леруа Мерлен.{'\n\n'}
-            <BoldText>Запускай корабль и отправляйся в полёт!</BoldText>
-            </CommonText>
-        </InfoBlockStyled>
-        <Info $ratio={ratio}>
-            <CommonText>
-                Ведущий аналитик{'\n'}
-                <BoldText>Леруа Мерлен</BoldText>
-            </CommonText>
-        </Info>
-        <ButtonStyled onClick={next}>ПОЕХАЛИ!</ButtonStyled>
-    </Wrapper>
+        <Wrapper $ratio={ratio}>
+            <Man $ratio={ratio} />
+            <InfoBlockStyled isBigTale taleLeft={92} maxWidth={240} $ratio={ratio}>
+                <CommonText isBig>
+                Приветствую на борту космического корабля!{'\n\n'}
+                Скоро мы отправимся в путешествие на «Планету аналитиков» с Леруа Мерлен.{'\n\n'}
+                <BoldText>Запускай корабль и отправляйся в полёт!</BoldText>
+                </CommonText>
+            </InfoBlockStyled>
+            <Info $ratio={ratio}>
+                <CommonText>
+                    Ведущий аналитик{'\n'}
+                    <BoldText>Леруа Мерлен</BoldText>
+                </CommonText>
+            </Info>
+            <ButtonStyled onClick={handleNext}>ПОЕХАЛИ!</ButtonStyled>
+        </Wrapper>
     )
 }

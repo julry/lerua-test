@@ -6,6 +6,7 @@ import { CommonText } from "../shared/texts/CommonText";
 import { BoldText } from "../shared/texts/BoldText";
 import { InfoBlock } from "../shared/InfoBlock";
 import { ButtonBottom } from "../shared/Button";
+import { reachMetrikaGoal } from "../../utils/reachMetrikaGoal";
 
 const Wrapper = styled.div`
     position: relative;
@@ -41,7 +42,10 @@ const ButtonBottomStyled = styled(ButtonBottom)`
 export const Final2 = () => {
     const ratio = useSizeRatio();
 
-    const handleClick = () => {};
+    const handleClick = () => {
+        reachMetrikaGoal('lerua_job');
+        window.open('', '_blank');
+    };
 
     return (
         <Wrapper $ratio={ratio}>

@@ -15,6 +15,7 @@ import { initialItems2 as initialItems } from "./items";
 import { Item } from "./Item";
 import { GameBlock } from "./GameBlock";
 import { SWITCH_DURATION, SWITCH_NAME, AnswerExplain, ProccessExplain, StakeholderExplain } from "./constants";
+import { reachMetrikaGoal } from "../../../utils/reachMetrikaGoal";
 
 const Wrapper = styled(GameWrapper)`
     padding-left: ${({$ratio}) => $ratio * 23}px;
@@ -155,6 +156,11 @@ export const Game2 = () => {
             }
         }
     }, [proccessItems, stakeholdersItems, itemsLeft, itemsRight]);
+
+    const handleNext = () => {
+        reachMetrikaGoal('level2');
+        next();
+    }
 
     const handlePushToProccess = (item) => {
         setItemsLeft(prev => prev.filter(({id}) => id !== item.id));
@@ -312,7 +318,7 @@ export const Game2 = () => {
             </Explaining>
             <Additional 
                 shown={finalModal.shown}
-                onClick={next}
+                onClick={handleNext}
                 blockInfo={[
                     {
                         text: 

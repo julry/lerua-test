@@ -11,6 +11,7 @@ import { CommonText } from "../../shared/texts/CommonText";
 import { Item } from "./Item";
 import {correctAnswers, initialItems} from './items';
 import { Additional } from "../../shared/Additional";
+import { reachMetrikaGoal } from "../../../utils/reachMetrikaGoal";
 
 
 const SWITCH_DURATION = 400;
@@ -91,6 +92,11 @@ export const Game1 = () => {
     const {next} = useProgress();
     const ratio = useSizeRatio();
     
+    const handleNext = () => {
+        reachMetrikaGoal('level1');
+        next();
+    }
+
     const checkAnswers = () => {
         let isIncorrect = false;
         for (let i = 0; i < items.length; i++) {
@@ -202,7 +208,7 @@ export const Game1 = () => {
             </Wrapper>
             <Additional
                 shown={finalModal.shown}
-                onClick={next}
+                onClick={handleNext}
                 blockInfo={[
                     {
                         text: 

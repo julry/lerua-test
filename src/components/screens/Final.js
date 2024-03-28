@@ -9,6 +9,7 @@ import { Button } from "../shared/Button";
 import { useProgress } from "../../contexts/ProgressContext";
 import { colors } from "../../constants/colors";
 import { useState } from "react";
+import { reachMetrikaGoal } from "../../utils/reachMetrikaGoal";
 
 const Wrapper = styled.div`
     position: relative;
@@ -149,7 +150,7 @@ const Input = styled.input`
 export const Final = () => {
     const ratio = useSizeRatio();
     const {next} = useProgress();
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState('');
     const [isSending, setIsSending] = useState(false);
     const [isCorrect, setIsCorrect] = useState(true);
     const [isAgreed, setIsAgreed] = useState(false);
@@ -191,6 +192,7 @@ export const Final = () => {
         fetch(myRequest)
           .finally(() => {
             setIsSending(false);
+            reachMetrikaGoal('email');
             next();
           });
       };

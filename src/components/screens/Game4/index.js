@@ -17,6 +17,7 @@ import { Additional } from "../../shared/Additional";
 import explainTip from "./explainTip.svg";
 import { Button } from "../../shared/Button";
 import { Explaining } from "../../shared/Explaining";
+import { reachMetrikaGoal } from "../../../utils/reachMetrikaGoal";
 
 const Wrapper = styled(GameWrapper)`
     padding-left: ${({$ratio}) => $ratio * 20}px;
@@ -269,6 +270,11 @@ export const Game4 = () => {
         })
     };
 
+    const handleNext = () => {
+        reachMetrikaGoal('level4');
+        next();
+    };
+
     return (
         <>
             <Wrapper 
@@ -400,7 +406,7 @@ export const Game4 = () => {
             />
             <Additional
                 shown={isFinalModal}
-                onClick={next}
+                onClick={handleNext}
                 blockInfo={[
                     {
                         text: 

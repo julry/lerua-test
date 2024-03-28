@@ -13,6 +13,7 @@ import { CommonText } from "./texts/CommonText";
 import { Button } from "./Button";
 import { BoldText } from "./texts/BoldText";
 import { blurredStyle } from "../../constants/styles";
+import { reachMetrikaGoal } from "../../utils/reachMetrikaGoal";
 
 const ANIMATION_DURATION = 300;
 
@@ -149,6 +150,7 @@ const RulesBtn = styled(Button)`
 export const PathSreen = ({ activeElement, isFirstRules }) => {
     const [isHandShown, setIsHandShown] = useState(false);
     const [isRulesShown, setIsRulesShown] = useState(isFirstRules);
+    const [isTrainingEnd, setIsTrainingEnd] = useState(false);
     const {next} = useProgress();
     const ratio = useSizeRatio();
 
@@ -164,6 +166,11 @@ export const PathSreen = ({ activeElement, isFirstRules }) => {
 
     const handleCloseRules = () => {
         if (isFirstRules) {
+            if (!isTrainingEnd) {
+                reachMetrikaGoal('training');
+                setIsTrainingEnd(true)
+            }
+
             setTimeout(() => {
                 setIsHandShown(true);  
             }, 100);

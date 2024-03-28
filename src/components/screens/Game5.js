@@ -10,6 +10,7 @@ import { useSizeRatio } from "../../contexts/SizeRatioContext";
 import { colors } from "../../constants/colors";
 import { Additional } from "../shared/Additional";
 import { Explaining } from "../shared/Explaining";
+import { reachMetrikaGoal } from "../../utils/reachMetrikaGoal";
 
 const RuleBlockStyled = styled(RuleBlock)`
     padding: ${({$ratio}) => $ratio * 15}px;
@@ -126,116 +127,121 @@ export const Game5 = () => {
         return answer === id ? colors.yellow : undefined;
     };
 
+    const handleNext = () => {
+        reachMetrikaGoal('level5');
+        next();
+    };
+
     return (
         <>
-        <GameWrapper
-            level={5}
-            overflow={'auto'}
-            onClick={handleClick}
-            btnDisabled={!answer}
-            btnText={isAnswered ? isShowCorrect ? "ДАЛЕЕ" : "ПОКАЗАТЬ ОТВЕТ" : "ОТВЕТИТЬ"}
-            blockInfo={[
-                {
-                    text: <CommonText>
-                    Отдохнувший сотрудник — продуктивный сотрудник. Аналитики — не исключение :){' '}
-                    Посидели в кафетерии, пора впитывать новые знания! Как раз для этого{' '}
-                    нужны <BoldText>учебные центры</BoldText>. Здесь будет множество книг, тихие{' '}
-                    зелёные уголки для чтения и удобные лекционные залы.
-                    </CommonText>,
-                    isBigTale: true,
-                    maxWidth: 318,
-                    taleLeft: 75,
-                    top: 45,
-                }, 
-                {
-                    text: <CommonText>
-                        Нам нужно много материалов для этой задачи, как бы во всех не запутаться!{' '}
-                        Тут явно требуется <BoldText>сортировка и выделение нужных данных.</BoldText> Давай разберёмся,{' '}
-                        сколько у нас сейчас сделано заказов и какие у них статусы.
-                    </CommonText>,
-                    isBigTale: true,
-                    maxWidth: 325,
-                    taleLeft: 75,
-                    top: 45,
-                }
-            ]}
-        >
-            <RuleBlockStyled $ratio={ratio}>
-                У тебя есть две таблицы: Orders и OrderStatus. Напиши SQL запрос,{' '}
-                который выведет список статусов и количество заказов для каждого статуса.{' '}
-                Ответ должен быть отсортирован по количеству заказов по убыванию.
-            </RuleBlockStyled>
-            <TableTitle $ratio={ratio}>
-                Таблица 1: Orders
-            </TableTitle>
-            <Task $ratio={ratio}>
-                — order_id (INT, идентификатор заказа){'\n'}
-                — customer_id (INT, идентификатор клиента){'\n'}
-                — order_date (DATE, дата заказа){'\n'}
-                — status_id (INT, идентификатор статуса заказа){'\n'}
-                — total_amount (DECIMAL, общая сумма заказа)
-            </Task>
-            <TableTitle $ratio={ratio}>
-                Таблица 2: OrderStatus
-            </TableTitle>
-            <Task $ratio={ratio}>
-                — status_id (INT, идентификатор статуса){'\n'}
-                — status_name (VARCHAR, наименование статуса, например «Отправлен», «В обработке», «Доставлен»)     
-            </Task>
-            <Answers $ratio={ratio}>
-                <AnswerWrapper 
-                    $ratio={ratio} 
-                    $isChosen={answer===1} 
-                    onClick={() => handlePickAnswer(1)}
-                    $bg={getAnswerBg(1)}
-                >
-                    <p>SELECT os.status_name, COUNT(o.order_id){'\n'}AS orders_count{'\n'}</p>
-                    <p>FROM Orders o{'\n'}</p>
-                    <p>INNER JOIN OrderStatus os{'\n'}ON o.status_id = os.status_id{'\n'}</p>
-                    <p>GROUP BY os.status_name{'\n'}</p>
-                    <p>ORDER BY orders_count DESC;</p>
-                </AnswerWrapper>
-                <AnswerWrapper
-                    $ratio={ratio} 
-                    $isChosen={answer===2} 
-                    onClick={() => handlePickAnswer(2)}
-                    $bg={getAnswerBg(2)}
-                >
-                    <p>SELECT status_name, COUNT(order_id){'\n'}</p>
-                    <p>FROM Orders{'\n'}</p>
-                    <p>JOIN OrderStatus{'\n'}ON Orders.status_id = OrderStatus.status_id{'\n'}</p>
-                    <p>ORDER BY COUNT(order_id) DESC;</p>
-                </AnswerWrapper>
-                <AnswerWrapper
-                    $ratio={ratio}
-                    $isChosen={answer===3} 
-                    onClick={() => handlePickAnswer(3)} 
-                    $bg={getAnswerBg(3)}
-                >
-                    <p>SELECT os.status_name,{'\n'}COUNT(*) AS orders_count{'\n'}</p>
-                    <p>FROM OrderStatus os{'\n'}</p>
-                    <p>LEFT JOIN Orders o ON os.status_id = o.status_id{'\n'}</p>
-                    <p>GROUP BY os.status_name{'\n'}</p>
-                    <p>ORDER BY orders_count ASC;</p>
-                </AnswerWrapper>
-                <AnswerWrapper 
-                    $ratio={ratio} 
-                    $isChosen={answer===4} 
-                    onClick={() => handlePickAnswer(4)}
-                    $bg={getAnswerBg(4)}
-                >
-                    <p>SELECT status_name, SUM(total_amount){'\n'}</p>
-                    <p>FROM Orders{'\n'}</p>
-                    <p>JOIN OrderStatus{'\n'}ON OrderStatus.status_id = Orders.status_id{'\n'}</p>
-                    <p>GROUP BY status_name{'\n'}</p>
-                    <p>ORDER BY SUM(total_amount) DESC;</p>
-                </AnswerWrapper>
-                <IncorrectText $ratio={ratio} opacity={+isAnswered}>{isCorrect ? 'Абсолютно верно!' : 'Верный ответ был совсем рядом…'}</IncorrectText>
-            </Answers>
-        </GameWrapper>
-        <Additional
+            <GameWrapper
+                level={5}
+                overflow={'auto'}
+                onClick={handleClick}
+                btnDisabled={!answer}
+                btnText={isAnswered ? isShowCorrect ? "ДАЛЕЕ" : "ПОКАЗАТЬ ОТВЕТ" : "ОТВЕТИТЬ"}
+                blockInfo={[
+                    {
+                        text: <CommonText>
+                        Отдохнувший сотрудник — продуктивный сотрудник. Аналитики — не исключение :){' '}
+                        Посидели в кафетерии, пора впитывать новые знания! Как раз для этого{' '}
+                        нужны <BoldText>учебные центры</BoldText>. Здесь будет множество книг, тихие{' '}
+                        зелёные уголки для чтения и удобные лекционные залы.
+                        </CommonText>,
+                        isBigTale: true,
+                        maxWidth: 318,
+                        taleLeft: 75,
+                        top: 45,
+                    }, 
+                    {
+                        text: <CommonText>
+                            Нам нужно много материалов для этой задачи, как бы во всех не запутаться!{' '}
+                            Тут явно требуется <BoldText>сортировка и выделение нужных данных.</BoldText> Давай разберёмся,{' '}
+                            сколько у нас сейчас сделано заказов и какие у них статусы.
+                        </CommonText>,
+                        isBigTale: true,
+                        maxWidth: 325,
+                        taleLeft: 75,
+                        top: 45,
+                    }
+                ]}
+            >
+                <RuleBlockStyled $ratio={ratio}>
+                    У тебя есть две таблицы: Orders и OrderStatus. Напиши SQL запрос,{' '}
+                    который выведет список статусов и количество заказов для каждого статуса.{' '}
+                    Ответ должен быть отсортирован по количеству заказов по убыванию.
+                </RuleBlockStyled>
+                <TableTitle $ratio={ratio}>
+                    Таблица 1: Orders
+                </TableTitle>
+                <Task $ratio={ratio}>
+                    — order_id (INT, идентификатор заказа){'\n'}
+                    — customer_id (INT, идентификатор клиента){'\n'}
+                    — order_date (DATE, дата заказа){'\n'}
+                    — status_id (INT, идентификатор статуса заказа){'\n'}
+                    — total_amount (DECIMAL, общая сумма заказа)
+                </Task>
+                <TableTitle $ratio={ratio}>
+                    Таблица 2: OrderStatus
+                </TableTitle>
+                <Task $ratio={ratio}>
+                    — status_id (INT, идентификатор статуса){'\n'}
+                    — status_name (VARCHAR, наименование статуса, например «Отправлен», «В обработке», «Доставлен»)     
+                </Task>
+                <Answers $ratio={ratio}>
+                    <AnswerWrapper 
+                        $ratio={ratio} 
+                        $isChosen={answer===1} 
+                        onClick={() => handlePickAnswer(1)}
+                        $bg={getAnswerBg(1)}
+                    >
+                        <p>SELECT os.status_name, COUNT(o.order_id){'\n'}AS orders_count{'\n'}</p>
+                        <p>FROM Orders o{'\n'}</p>
+                        <p>INNER JOIN OrderStatus os{'\n'}ON o.status_id = os.status_id{'\n'}</p>
+                        <p>GROUP BY os.status_name{'\n'}</p>
+                        <p>ORDER BY orders_count DESC;</p>
+                    </AnswerWrapper>
+                    <AnswerWrapper
+                        $ratio={ratio} 
+                        $isChosen={answer===2} 
+                        onClick={() => handlePickAnswer(2)}
+                        $bg={getAnswerBg(2)}
+                    >
+                        <p>SELECT status_name, COUNT(order_id){'\n'}</p>
+                        <p>FROM Orders{'\n'}</p>
+                        <p>JOIN OrderStatus{'\n'}ON Orders.status_id = OrderStatus.status_id{'\n'}</p>
+                        <p>ORDER BY COUNT(order_id) DESC;</p>
+                    </AnswerWrapper>
+                    <AnswerWrapper
+                        $ratio={ratio}
+                        $isChosen={answer===3} 
+                        onClick={() => handlePickAnswer(3)} 
+                        $bg={getAnswerBg(3)}
+                    >
+                        <p>SELECT os.status_name,{'\n'}COUNT(*) AS orders_count{'\n'}</p>
+                        <p>FROM OrderStatus os{'\n'}</p>
+                        <p>LEFT JOIN Orders o ON os.status_id = o.status_id{'\n'}</p>
+                        <p>GROUP BY os.status_name{'\n'}</p>
+                        <p>ORDER BY orders_count ASC;</p>
+                    </AnswerWrapper>
+                    <AnswerWrapper 
+                        $ratio={ratio} 
+                        $isChosen={answer===4} 
+                        onClick={() => handlePickAnswer(4)}
+                        $bg={getAnswerBg(4)}
+                    >
+                        <p>SELECT status_name, SUM(total_amount){'\n'}</p>
+                        <p>FROM Orders{'\n'}</p>
+                        <p>JOIN OrderStatus{'\n'}ON OrderStatus.status_id = Orders.status_id{'\n'}</p>
+                        <p>GROUP BY status_name{'\n'}</p>
+                        <p>ORDER BY SUM(total_amount) DESC;</p>
+                    </AnswerWrapper>
+                    <IncorrectText $ratio={ratio} opacity={+isAnswered}>{isCorrect ? 'Абсолютно верно!' : 'Верный ответ был совсем рядом…'}</IncorrectText>
+                </Answers>
+            </GameWrapper>
+            <Additional
                 shown={isAdditional}
-                onClick={next}
+                onClick={handleNext}
                 blockInfo={[
                     {
                         text: 

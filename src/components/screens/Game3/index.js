@@ -17,6 +17,7 @@ import { Explaining } from "../../shared/Explaining";
 import { Additional } from "../../shared/Additional";
 import { BoldText } from "../../shared/texts/BoldText";
 import explainTip from './explainTip.svg';
+import { reachMetrikaGoal } from "../../../utils/reachMetrikaGoal";
 
 const ANIMATION_NAME = 'question_animated';
 const ANIMATION_DURATION = 300;
@@ -276,6 +277,11 @@ export const Game3 = () => {
         setIsExplain(false);
     };
 
+    const handleNext = () => {
+        reachMetrikaGoal('level3');
+        next();
+    };
+
     return (
         <>
             <Wrapper $ratio={ratio} $isLast={question === 3 && answers[3]}>
@@ -401,7 +407,7 @@ export const Game3 = () => {
             </ExplainingStyled>
             <Additional
                 shown={isFinish}
-                onClick={next}
+                onClick={handleNext}
                 blockInfo={[
                     {
                         text: 
